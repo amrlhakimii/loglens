@@ -129,7 +129,7 @@ export function Modal({ title, onClose, children, wide = false }: { title: strin
   }
   return (
     <div className="fixed inset-0 flex items-end md:items-center justify-center md:p-6" style={{ zIndex: 9999 }} onKeyDown={onKeyDown}>
-      <div className="absolute inset-0" style={{ background: 'rgba(10,14,20,0.6)', backdropFilter: 'blur(6px)' }} onClick={onClose} aria-hidden="true" />
+      <div className="absolute inset-0 cursor-pointer" style={{ background: 'rgba(10,14,20,0.6)', backdropFilter: 'blur(6px)' }} onClick={onClose} aria-hidden="true" />
       <div
         ref={sheetRef}
         role="dialog"

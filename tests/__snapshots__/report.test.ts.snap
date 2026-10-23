@@ -1,0 +1,183 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`markdown report > matches the snapshot for the combined sample with triage decisions 1`] = `
+"# LogLens report
+
+> LogLens rules are heuristics validated on invented sample data only. This report is a triage aid, not a verdict. Review every alert yourself.
+
+## Summary
+
+- File: sample-combined.log
+- Content hash: d02275f7ef31e5584e97e1f98d2958ed
+- Generated: 2026-10-24T10:30:00.000Z
+- Format: mixed
+- Events parsed: 35 (lines skipped: 0)
+- Time range: 2026-10-23 08:01:12 UTC to 2026-10-23 09:40:01 UTC
+- Hosts: WIN-LAB01, lab-ubuntu01
+- Users: NT AUTHORITY\\SYSTEM, WIN-LAB01\\labuser, admin, labuser, oracle, root, test
+- Alerts: 6 (1 critical, 4 high, 1 medium, 0 low)
+- Triage: 4 new, 0 investigating, 1 closed (benign), 1 escalated
+
+## Alerts
+
+### 1. [CRITICAL] SSH Brute Force
+
+- ATT&CK: T1110 Brute Force
+- When: 2026-10-23 09:21:05 UTC
+- Host: lab-ubuntu01
+- User: labuser
+- Status: Escalated
+- Note: Login from unknown source after burst
+- Why it fired: 8 failed SSH logins from 203.0.113.45 in 25s across 5 accounts, then a successful login as labuser.
+- Detail: Accounts tried: admin, test, root, oracle, labuser
+
+Matched lines:
+
+\`\`\`text
+21: Oct 23 09:21:05 lab-ubuntu01 sshd[2455]: Failed password for invalid user admin from 203.0.113.45 port 50210 ssh2
+23: Oct 23 09:21:10 lab-ubuntu01 sshd[2457]: Failed password for invalid user test from 203.0.113.45 port 50214 ssh2
+24: Oct 23 09:21:13 lab-ubuntu01 sshd[2459]: Failed password for root from 203.0.113.45 port 50218 ssh2
+25: Oct 23 09:21:16 lab-ubuntu01 sshd[2461]: Failed password for root from 203.0.113.45 port 50222 ssh2
+... 4 more lines omitted ...
+31: Oct 23 09:21:34 lab-ubuntu01 sshd[2471]: Accepted password for labuser from 203.0.113.45 port 50242 ssh2
+\`\`\`
+
+Next steps:
+
+- Check whether the successful login (if any) was a real user: ask them, or look for the same user logging in from their usual address earlier.
+- If the login was not expected, end that session, disable the account and reset its credentials.
+- Review what the session did next: sudo use, new files, new users, outbound connections.
+- Reduce exposure: disable password logins, use keys, restrict the source range, add rate limiting or fail2ban.
+
+### 2. [HIGH] Suspicious LSASS Memory Access
+
+- ATT&CK: T1003.001 OS Credential Dumping: LSASS Memory
+- When: 2026-10-23 08:06:15 UTC
+- Host: WIN-LAB01
+- User: NT AUTHORITY\\SYSTEM
+- Status: New
+- Why it fired: C:\\Users\\labuser\\AppData\\Local\\Temp\\dumper.exe opened lsass.exe with access 0x1fffff
+
+Matched lines:
+
+\`\`\`text
+4: {"EventCode": 10, "UtcTime": "2026-10-23 08:06:15", "Computer": "WIN-LAB01", "User": "NT AUTHORITY\\\\SYSTEM", "SourceImage": "C:\\\\Users\\\\labuser\\\\AppData\\\\Local\\\\Temp\\\\dumper.exe", "TargetImage": "C:\\\\Windows\\\\System32\\\\lsass.exe", "GrantedAccess": "0x1fffff"}
+\`\`\`
+
+Next steps:
+
+- Identify SourceImage: is it a known security product, backup agent or a file in a user-writable folder?
+- Check whether the file is signed and how long it has existed on the host.
+- Look for a dump file written to disk (for example .dmp) shortly afterwards.
+- If suspicious, treat accounts that were logged on to this host as exposed and reset their credentials.
+
+### 3. [HIGH] LSASS Dump via comsvcs.dll MiniDump
+
+- ATT&CK: T1003.001 OS Credential Dumping: LSASS Memory
+- When: 2026-10-23 08:07:01 UTC
+- Host: WIN-LAB01
+- User: WIN-LAB01\\labuser
+- Status: New
+- Why it fired: comsvcs.dll MiniDump was called, a known way to dump process memory.
+
+Matched lines:
+
+\`\`\`text
+6: {"EventCode": 1, "UtcTime": "2026-10-23 08:07:01", "Computer": "WIN-LAB01", "User": "WIN-LAB01\\\\labuser", "Image": "C:\\\\Windows\\\\System32\\\\rundll32.exe", "ParentImage": "C:\\\\Windows\\\\System32\\\\cmd.exe", "CommandLine": "rundll32.exe C:\\\\windows\\\\System32\\\\comsvcs.dll, MiniDump 624 C:\\\\Temp\\\\out.dmp f ...[truncated]
+\`\`\`
+
+Next steps:
+
+- Check the process ID in the command line: is it lsass.exe?
+- Look for the dump file path (the last argument) and whether the file was created or copied elsewhere.
+- Review the parent process and the logged-on user that ran it.
+- Treat credentials on the host as exposed if the dump target was lsass.exe.
+
+### 4. [HIGH] Scheduled Task Created via schtasks
+
+- ATT&CK: T1053.005 Scheduled Task/Job: Scheduled Task
+- When: 2026-10-23 08:09:30 UTC
+- Host: WIN-LAB01
+- User: WIN-LAB01\\labuser
+- Status: Closed (benign)
+- Note: Planned task | confirmed with owner
+- Why it fired: A scheduled task was created in a risky way (SYSTEM, user-writable path, or risky parent).
+
+Matched lines:
+
+\`\`\`text
+7: {"EventCode": 1, "UtcTime": "2026-10-23 08:09:30", "Computer": "WIN-LAB01", "User": "WIN-LAB01\\\\labuser", "Image": "C:\\\\Windows\\\\System32\\\\schtasks.exe", "ParentImage": "C:\\\\Windows\\\\System32\\\\cmd.exe", "CommandLine": "schtasks /create /tn Updater /tr C:\\\\Users\\\\Public\\\\run.exe /sc minute /mo 5 /ru  ...[truncated]
+\`\`\`
+
+Next steps:
+
+- Read the /tr value: what program will run, and is that file in a user-writable folder?
+- Check /ru: running as SYSTEM raises the stakes.
+- Find the file on disk and check its signature, age and hash.
+- If the task is not expected, delete it and look for how it was planted (parent process, user).
+
+### 5. [HIGH] Registry Run Key Persistence
+
+- ATT&CK: T1547.001 Boot or Logon Autostart Execution: Registry Run Keys
+- When: 2026-10-23 08:12:45 UTC
+- Host: WIN-LAB01
+- User: WIN-LAB01\\labuser
+- Status: New
+- Why it fired: Run key set: Updater = powershell.exe -w hidden C:\\Users\\labuser\\AppData\\Roaming\\u.ps1
+
+Matched lines:
+
+\`\`\`text
+9: {"EventCode": 13, "UtcTime": "2026-10-23 08:12:45", "Computer": "WIN-LAB01", "User": "WIN-LAB01\\\\labuser", "EventType": "SetValue", "TargetObject": "HKU\\\\S-1-5-21-1\\\\Software\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\Run\\\\Updater", "Details": "powershell.exe -w hidden C:\\\\Users\\\\labuser\\\\AppData\\\\Roaming ...[truncated]
+\`\`\`
+
+Next steps:
+
+- Read the Details value: what program or script is launched, and from which folder?
+- Check which process wrote the value and whether it belongs to a legitimate installer.
+- Inspect the target file (signature, age, hash).
+- Remove the value if it is not expected and look for the original infection point.
+
+### 6. [MEDIUM] PowerShell Encoded Command
+
+- ATT&CK: T1059.001 Command and Scripting Interpreter: PowerShell
+- When: 2026-10-23 08:03:40 UTC
+- Host: WIN-LAB01
+- User: WIN-LAB01\\labuser
+- Status: New
+- Why it fired: PowerShell ran an encoded command that decodes to: Write-Host 'lab test'
+- Detail: Decoded payload: Write-Host 'lab test'
+
+Matched lines:
+
+\`\`\`text
+2: {"EventCode": 1, "UtcTime": "2026-10-23 08:03:40", "Computer": "WIN-LAB01", "User": "WIN-LAB01\\\\labuser", "Image": "C:\\\\Windows\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe", "ParentImage": "C:\\\\Windows\\\\System32\\\\cmd.exe", "CommandLine": "powershell.exe -NoP -enc VwByAGkAdABlAC0ASABvAHMAdAAgA ...[truncated]
+\`\`\`
+
+Next steps:
+
+- Decode the payload (LogLens shows a best-effort decode) and read what it does.
+- Check the parent process: was it launched by Office, a browser, a script host or a management agent?
+- Look for network connections and file writes from the same process just after this event.
+- Confirm with the user or system owner whether this was expected.
+
+## Session exclusions applied
+
+These were added in this session with "Tune this rule" and are not saved:
+
+- registry-run-key: \`Details:'odd'\`
+
+## Rules used
+
+| Rule | Version | ATT&CK | Default severity |
+| --- | --- | --- | --- |
+| PowerShell Encoded Command (powershell-encoded-command) | 1.0.0 | T1059.001 | medium |
+| Suspicious LSASS Memory Access (lsass-memory-access) | 1.0.0 | T1003.001 | high |
+| LSASS Dump via comsvcs.dll MiniDump (comsvcs-minidump) | 1.0.0 | T1003.001 | high |
+| Scheduled Task Created via schtasks (schtasks-create) | 1.0.0 | T1053.005 | medium |
+| Registry Run Key Persistence (registry-run-key) | 1.0.0 | T1547.001 | medium |
+| SSH Brute Force (ssh-brute-force) | 1.0.0 | T1110 | high |
+
+_Generated locally in the browser by LogLens. Nothing was uploaded._
+"
+`;

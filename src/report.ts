@@ -66,11 +66,13 @@ export function buildReport({ analysis, findings, triage, exclusions, generatedA
     out.push(`- Why it fired: ${f.summary}`)
     if (f.detail) out.push(`- Detail: ${f.detail}`)
     out.push('', 'Matched lines:', '')
-    const lines = f.eventIds.slice(0, MAX_LINES_PER_ALERT).map((id) => {
+    // Long alerts (brute force) keep the last line, which is usually the success that matters most.
+    const shown = f.eventIds.length > MAX_LINES_PER_ALERT ? [...f.eventIds.slice(0, MAX_LINES_PER_ALERT - 1), f.eventIds[f.eventIds.length - 1]] : f.eventIds
+    const lines = shown.map((id) => {
       const ev = byId.get(id)
       return `${id}: ${clip(ev ? ev.raw : '(line not available)')}`
     })
-    if (f.eventIds.length > MAX_LINES_PER_ALERT) lines.push(`... and ${f.eventIds.length - MAX_LINES_PER_ALERT} more`)
+    if (f.eventIds.length > MAX_LINES_PER_ALERT) lines.splice(MAX_LINES_PER_ALERT - 1, 0, `... ${f.eventIds.length - MAX_LINES_PER_ALERT} more lines omitted ...`)
     const block = lines.join('\n')
     const fnc = fence(block)
     out.push(fnc + 'text', block, fnc, '')

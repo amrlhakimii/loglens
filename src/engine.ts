@@ -6,7 +6,7 @@ import type { Exclusion, Finding, LogEvent, Rule, RuleContext, Severity } from '
 
 export const DEFAULT_CONTEXT: RuleContext = { bruteForce: { ...DEFAULT_BRUTE_FORCE } }
 /** Stops a pathological file (every line matching) from producing millions of alerts. */
-export const MAX_FINDINGS_PER_RULE = 2000
+export const MAX_FINDINGS_PER_RULE = 500
 
 export const SEVERITY_ORDER: Record<Severity, number> = { low: 0, medium: 1, high: 2, critical: 3 }
 

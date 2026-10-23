@@ -34,7 +34,7 @@ export function AlertList(p: Props) {
     e.preventDefault()
     const f = p.findings[next]
     p.onSelect(f.id)
-    document.getElementById(`alert-${CSS.escape(f.id)}`)?.focus()
+    document.getElementById(`alert-${f.id}`)?.focus()
   }
 
   return (
