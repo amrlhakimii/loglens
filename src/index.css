@@ -1,0 +1,85 @@
+@import "tailwindcss";
+@import "@fontsource/syne/400.css";
+@import "@fontsource/syne/600.css";
+@import "@fontsource/syne/700.css";
+@import "@fontsource/syne/800.css";
+
+@theme {
+  --color-primary: #222831;
+  --color-secondary: #393E46;
+  --color-accent: #00ADB5;
+  --color-light: #EEEEEE;
+  /* Body font: system stack (no third-party font requests). Display font: Syne, self-hosted via @fontsource. */
+  --font-sans: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-display: 'Syne', system-ui, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --animate-fade-up: fade-up 0.3s ease-out;
+  --animate-modal-in: modal-in 0.18s ease-out;
+  --animate-sheet-in: sheet-in 0.3s ease-out;
+}
+
+body {
+  margin: 0;
+  background-color: #222831;
+  color: #EEEEEE;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-synthesis: none;
+  min-height: 100dvh;
+}
+
+#root { position: relative; }
+
+h1, h2, h3 { font-family: 'Syne', system-ui, sans-serif; }
+
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+button, a, [role="button"], summary, select, label[for] { touch-action: manipulation; cursor: pointer; }
+button:disabled { cursor: not-allowed; }
+
+/* Prevent iOS zoom on input focus */
+input, select, textarea { font-size: 16px !important; }
+
+/* No focus rings: focus is shown by a border-colour change (see components). */
+:focus { outline: none; }
+:focus-visible { outline: none; }
+
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #393E46; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #00ADB5; }
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes modal-in {
+  from { opacity: 0; transform: scale(0.97) translateY(6px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+@keyframes sheet-in {
+  from { transform: translateY(100%); }
+  to   { transform: translateY(0); }
+}
+@keyframes toast-in {
+  from { opacity: 0; transform: translateY(-10px) scale(0.96); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes skeleton-shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.skeleton {
+  background: linear-gradient(90deg, rgba(255,255,255,0.04) 25%, rgba(255,255,255,0.09) 37%, rgba(255,255,255,0.04) 63%);
+  background-size: 400% 100%;
+  animation: skeleton-shimmer 1.6s ease infinite;
+}
+
+/* Interactive elements show focus with a border colour, never a ring. */
+.focus-border:focus-visible, .focus-border:focus { border-color: #00ADB5; }
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+}
