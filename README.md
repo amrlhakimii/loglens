@@ -6,7 +6,13 @@ A browser log analyzer. Drop in a Sysmon or Linux auth log and LogLens flags the
 
 > **Heuristics, not verdicts.** The rules are simple heuristics validated on *invented* sample data only. They will miss real attacks and flag harmless activity. LogLens is a learning and portfolio project, not a SIEM, an EDR or production-grade coverage.
 
-Screenshots: TODO (add before publishing)
+![Landing page](docs/screenshots/landing.png)
+
+![Alerts with explanation](docs/screenshots/alerts.png)
+
+![Timeline](docs/screenshots/timeline.png)
+
+<img src="docs/screenshots/mobile.png" alt="Mobile layout" width="280">
 
 Built on the rules from my [SOC Detection Lab](../soc-detection-lab) (Python + Sigma + SPL), ported to TypeScript.
 
