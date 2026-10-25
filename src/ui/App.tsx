@@ -95,8 +95,17 @@ export default function App() {
         {state.kind === 'ready' && state.analysis.events.length === 0 && (
           <div className="mx-auto max-w-2xl">
             <Card>
-              <EmptyState icon="🤷" title="I could not recognise that format" description="LogLens reads Sysmon JSON lines and Linux auth logs (syslog style). Here are the first lines it saw:">
-                <div className="text-left">
+              <EmptyState icon="🤷" title="No recognised events in that file" description="LogLens could not read any events from it.">
+                <div className="text-left max-w-xl">
+                  <p className="text-sm font-semibold mb-1">Supported formats</p>
+                  <ul className="list-disc pl-5 text-sm text-[#EEEEEE]/80 mb-4 space-y-1">
+                    <li>Sysmon JSON with flat fields (EventCode or EventID, Image, CommandLine, ...)</li>
+                    <li>Winlogbeat / ECS Sysmon JSON (winlog.event_id and winlog.event_data)</li>
+                    <li>Get-WinEvent | ConvertTo-Json (Id plus a Message with Key: value lines)</li>
+                    <li>Linux auth.log (sshd and sudo, syslog or RFC 3339 timestamps)</li>
+                  </ul>
+                  <p className="text-xs text-[#EEEEEE]/60 mb-3">JSON can be one object per line or a single array. EVTX files are not read directly: export them to JSON first.</p>
+                  <p className="text-sm font-semibold mb-1">First lines LogLens saw</p>
                   <pre className="max-w-full overflow-x-auto rounded-xl bg-[#222831] border border-[#393E46] p-3 font-mono text-xs whitespace-pre-wrap break-all">{state.analysis.preview.join('\n') || '(the file is empty)'}</pre>
                   <div className="mt-4 text-center">
                     <Button onClick={reset}>Try another file</Button>

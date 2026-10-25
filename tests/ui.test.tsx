@@ -122,8 +122,19 @@ describe('UI smoke', () => {
     render(<App />)
     const input = screen.getByLabelText('Choose a log file') as HTMLInputElement
     await user.upload(input, new File(['hello\nthis is not a log\n'], 'weird.txt', { type: 'text/plain' }))
-    expect(await screen.findByText(/could not recognise that format/i)).toBeInTheDocument()
+    expect(await screen.findByText(/no recognised events/i)).toBeInTheDocument()
     expect(screen.getByText(/this is not a log/)).toBeInTheDocument()
+  })
+
+  it('valid JSON without event ids shows the supported formats and the first lines seen', async () => {
+    const user = userEvent.setup()
+    render(<App />)
+    const input = screen.getByLabelText('Choose a log file') as HTMLInputElement
+    await user.upload(input, new File(['{"foo": "bar", "level": "info"}\n{"foo": "baz"}\n'], 'app.jsonl', { type: 'application/json' }))
+    expect(await screen.findByText(/no recognised events/i)).toBeInTheDocument()
+    for (const fmt of [/Winlogbeat \/ ECS/, /Get-WinEvent/, /Linux auth\.log/, /Sysmon JSON with flat fields/]) expect(screen.getByText(fmt)).toBeInTheDocument()
+    expect(screen.getByText(/EVTX/)).toBeInTheDocument()
+    expect(screen.getByText(/"foo": "baz"|"foo":"baz"/)).toBeInTheDocument()
   })
 
   it('rejects a file over the size cap with a clear message', async () => {
