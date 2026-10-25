@@ -244,3 +244,14 @@ describe('powershell-download-cradle', () => {
     expect(Date.now() - t).toBeLessThan(500)
   })
 })
+
+describe('lsass allowlist: 32-bit Windows binaries', () => {
+  it('does not alert on WmiPrvSE.exe from SysWOW64', () => {
+    const line = JSON.stringify({ EventCode: '10', Computer: 'W', SourceImage: 'C:\\Windows\\SysWOW64\\wbem\\WmiPrvSE.exe', TargetImage: 'C:\\Windows\\system32\\lsass.exe', GrantedAccess: '0x1410' })
+    expect(detect(parseLog(line).events).findings).toEqual([])
+  })
+  it('still alerts when the same name runs from a user folder', () => {
+    const line = JSON.stringify({ EventCode: '10', Computer: 'W', SourceImage: 'C:\\Users\\x\\AppData\\Local\\Temp\\WmiPrvSE.exe', TargetImage: 'C:\\Windows\\system32\\lsass.exe', GrantedAccess: '0x1410' })
+    expect(detect(parseLog(line).events).findings.map((f) => f.ruleId)).toEqual(['lsass-memory-access'])
+  })
+})

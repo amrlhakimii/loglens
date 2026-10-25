@@ -7,7 +7,7 @@ export const LSASS_DUMP_ACCESS = ['0x1010', '0x1410', '0x1438', '0x143a', '0x1f0
  * Paths a trusted source must live under. Matching on the file name alone would let malware
  * named csfalconservice.exe in a temp folder through, so both name and location are required.
  */
-export const LSASS_PROTECTED_PATHS = ['c:\\program files\\', 'c:\\program files (x86)\\', 'c:\\windows\\system32\\', 'c:\\programdata\\microsoft\\windows defender\\'] as const
+export const LSASS_PROTECTED_PATHS = ['c:\\program files\\', 'c:\\program files (x86)\\', 'c:\\windows\\system32\\', 'c:\\windows\\syswow64\\', 'c:\\programdata\\microsoft\\windows defender\\'] as const
 /** Processes that legitimately open LSASS (examples; tune per environment). Grouped by product. */
 export const LSASS_SOURCE_ALLOWLIST = [
   // Windows

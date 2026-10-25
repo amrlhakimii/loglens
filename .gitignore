@@ -26,3 +26,6 @@ dist-ssr
 # Keep the invented sample logs
 !src/samples/*.log
 .DS_Store
+
+# Local Netlify folder
+.netlify
