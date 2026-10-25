@@ -47,14 +47,14 @@ export function RawView({ events, findings }: { events: LogEvent[]; findings: Fi
           spellCheck={false}
         />
       </Field>
-      <p className="text-xs text-[#EEEEEE]/60" aria-live="polite">
+      <p className="text-xs text-[#e6edf7]/60" aria-live="polite">
         Showing {rows.length.toLocaleString('en-US')} of {events.length.toLocaleString('en-US')} events
       </p>
       {rows.length === 0 ? (
         <EmptyState icon="🔎" title="No events match that search" description="Try plain text, or field:value with a field name from the raw line." />
       ) : (
         <div
-          className="overflow-y-auto rounded-2xl bg-[#222831] border border-[#393E46]"
+          className="overflow-y-auto rounded-2xl bg-[#0f1729] border border-[#1e2a44]"
           style={{ height: Math.min(VIEW_H, rows.length * ROW_H + 2) }}
           onScroll={(e) => setScrollTop(e.currentTarget.scrollTop)}
           tabIndex={0}
@@ -70,9 +70,9 @@ export function RawView({ events, findings }: { events: LogEvent[]; findings: Fi
                     type="button"
                     onClick={() => setPicked(e.id)}
                     aria-pressed={picked === e.id}
-                    className={`flex w-full items-center gap-3 px-3 h-full text-left cursor-pointer transition-colors ${picked === e.id ? 'bg-[#00ADB5]/15' : 'hover:bg-white/5'}`}
+                    className={`flex w-full items-center gap-3 px-3 h-full text-left cursor-pointer transition-colors ${picked === e.id ? 'bg-[#4c8dff]/15' : 'hover:bg-white/5'}`}
                   >
-                    <span className="w-14 shrink-0 text-right text-xs tabular-nums text-[#EEEEEE]/60">{e.id}</span>
+                    <span className="w-14 shrink-0 text-right text-xs tabular-nums text-[#e6edf7]/60">{e.id}</span>
                     <span className="w-4 shrink-0 text-orange-300">{a && <SeverityIcon severity={a.severity} />}</span>
                     <span className={`${MONO} truncate`}>{a && <span className="sr-only">Alert: </span>}{e.raw}</span>
                   </button>
@@ -83,13 +83,13 @@ export function RawView({ events, findings }: { events: LogEvent[]; findings: Fi
         </div>
       )}
       {selected && (
-        <div className="rounded-2xl p-4" style={{ background: 'rgba(57,62,70,0.6)', border: '1px solid rgba(238,238,238,0.06)' }}>
-          <h3 className="text-xs font-semibold uppercase tracking-widest text-[#EEEEEE]/60 mb-2">Event on line {selected.id}</h3>
+        <div className="rounded-2xl p-4" style={{ background: 'rgba(30,42,68,0.6)', border: '1px solid rgba(230,237,247,0.06)' }}>
+          <h3 className="text-xs font-semibold uppercase tracking-widest text-[#e6edf7]/60 mb-2">Event on line {selected.id}</h3>
           <table className="w-full text-sm">
             <tbody>
               {Object.entries(selected.fields).map(([k, v]) => (
                 <tr key={k}>
-                  <th scope="row" className="text-left align-top font-medium py-0.5 pr-3 whitespace-nowrap text-[#EEEEEE]/70">
+                  <th scope="row" className="text-left align-top font-medium py-0.5 pr-3 whitespace-nowrap text-[#e6edf7]/70">
                     {k}
                   </th>
                   <td className={`${MONO} py-0.5 break-all whitespace-pre-wrap`}>{v}</td>

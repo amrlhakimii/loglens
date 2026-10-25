@@ -38,18 +38,18 @@ export function Timeline({ events, findings, selectedId, onSelect }: Props) {
   const untimed = findings.filter((f) => !f.time).length
 
   return (
-    <section aria-labelledby="timeline-heading" className="rounded-2xl p-4 md:p-5" style={{ background: 'rgba(57,62,70,0.6)', backdropFilter: 'blur(8px)', border: '1px solid rgba(238,238,238,0.06)' }}>
-      <h2 id="timeline-heading" className="text-xs font-semibold uppercase tracking-widest text-[#EEEEEE]/60 mb-1">
+    <section aria-labelledby="timeline-heading" className="rounded-2xl p-4 md:p-5" style={{ background: 'rgba(30,42,68,0.6)', backdropFilter: 'blur(8px)', border: '1px solid rgba(230,237,247,0.06)' }}>
+      <h2 id="timeline-heading" className="text-xs font-semibold uppercase tracking-widest text-[#e6edf7]/60 mb-1">
         Timeline
       </h2>
-      <p className="text-xs text-[#EEEEEE]/60 mb-4">Left to right is time. Bars show how many events happened; marks are alerts. Select a mark to open it.</p>
+      <p className="text-xs text-[#e6edf7]/60 mb-4">Left to right is time. Bars show how many events happened; marks are alerts. Select a mark to open it.</p>
       <div className="overflow-x-auto">
         <div className="min-w-[640px]">
           <div className="grid grid-cols-[9rem_1fr] gap-3 items-end">
-            <span className="text-xs text-[#EEEEEE]/70">All events ({times.length})</span>
+            <span className="text-xs text-[#e6edf7]/70">All events ({times.length})</span>
             <div className="flex items-end gap-px h-16" role="img" aria-label={`Event density from ${formatTime(new Date(min).toISOString())} to ${formatTime(new Date(max).toISOString())}`}>
               {counts.map((c, i) => (
-                <div key={i} className="flex-1 rounded-t bg-[#00ADB5]/50" style={{ height: c ? `${Math.max(6, (c / peak) * 100)}%` : '2px', opacity: c ? 1 : 0.25 }} />
+                <div key={i} className="flex-1 rounded-t bg-[#4c8dff]/50" style={{ height: c ? `${Math.max(6, (c / peak) * 100)}%` : '2px', opacity: c ? 1 : 0.25 }} />
               ))}
             </div>
           </div>
@@ -57,10 +57,10 @@ export function Timeline({ events, findings, selectedId, onSelect }: Props) {
             const rule = RULES_BY_ID[ruleId]
             return (
               <div key={ruleId} className="grid grid-cols-[9rem_1fr] gap-3 items-center mt-3">
-                <span className="text-xs text-[#EEEEEE]/80 truncate" title={rule.title}>
+                <span className="text-xs text-[#e6edf7]/80 truncate" title={rule.title}>
                   {rule.title}
                 </span>
-                <div className="relative h-8 rounded-lg bg-[#222831]">
+                <div className="relative h-8 rounded-lg bg-[#0f1729]">
                   {findings
                     .filter((f) => f.ruleId === ruleId && f.time)
                     .map((f) => {
@@ -72,7 +72,7 @@ export function Timeline({ events, findings, selectedId, onSelect }: Props) {
                           onClick={() => onSelect(f.id)}
                           aria-label={`${f.severity} alert: ${rule.title} at ${formatTime(f.time)}`}
                           title={`${rule.title} - ${formatTime(f.time)}`}
-                          className={`absolute top-1/2 -translate-x-1/2 -translate-y-1/2 flex h-7 w-7 items-center justify-center rounded-full border bg-[#222831] transition-all cursor-pointer hover:scale-110 ${MARK_COLOR[f.severity]} ${selected ? 'border-2 bg-[#393E46]' : ''}`}
+                          className={`absolute top-1/2 -translate-x-1/2 -translate-y-1/2 flex h-7 w-7 items-center justify-center rounded-full border bg-[#0f1729] transition-all cursor-pointer hover:scale-110 ${MARK_COLOR[f.severity]} ${selected ? 'border-2 bg-[#1e2a44]' : ''}`}
                           style={{ left: `${Math.min(98, Math.max(2, pos(Date.parse(f.time!))))}%` }}
                         >
                           <SeverityIcon severity={f.severity} size={12} />
@@ -85,15 +85,15 @@ export function Timeline({ events, findings, selectedId, onSelect }: Props) {
           })}
           <div className="grid grid-cols-[9rem_1fr] gap-3 mt-2">
             <span />
-            <div className="flex justify-between text-xs text-[#EEEEEE]/60">
+            <div className="flex justify-between text-xs text-[#e6edf7]/60">
               <span>{formatTime(new Date(min).toISOString())}</span>
               <span>{formatTime(new Date(max).toISOString())}</span>
             </div>
           </div>
         </div>
       </div>
-      {lanes.length === 0 && <p className="mt-4 text-sm text-[#EEEEEE]/70">No alerts to mark. 🎉</p>}
-      {untimed > 0 && <p className="mt-3 text-xs text-[#EEEEEE]/60">{untimed} alerts have no timestamp and are not shown here.</p>}
+      {lanes.length === 0 && <p className="mt-4 text-sm text-[#e6edf7]/70">No alerts to mark. 🎉</p>}
+      {untimed > 0 && <p className="mt-3 text-xs text-[#e6edf7]/60">{untimed} alerts have no timestamp and are not shown here.</p>}
     </section>
   )
 }

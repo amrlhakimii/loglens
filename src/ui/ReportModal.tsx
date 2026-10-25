@@ -38,14 +38,14 @@ export function ReportModal({ analysis, findings, triage, exclusions, generatedA
 
   return (
     <Modal title="Report preview" onClose={onClose} wide>
-      <p className="text-xs text-[#EEEEEE]/60 mb-3">Markdown, built in your browser. Matched log lines are included, so check it for anything sensitive before sharing.</p>
+      <p className="text-xs text-[#e6edf7]/60 mb-3">Markdown, built in your browser. Matched log lines are included, so check it for anything sensitive before sharing.</p>
       <div className="flex gap-2 mb-3">
         <Button onClick={copy}>Copy Markdown</Button>
         <Button variant="secondary" onClick={download}>
           Download .md
         </Button>
       </div>
-      <pre tabIndex={0} aria-label="Report Markdown" className="max-h-[50dvh] overflow-auto rounded-xl bg-[#222831] border border-[#393E46] p-3 font-mono text-xs whitespace-pre-wrap break-words">
+      <pre tabIndex={0} aria-label="Report Markdown" className="max-h-[50dvh] overflow-auto rounded-xl bg-[#0f1729] border border-[#1e2a44] p-3 font-mono text-xs whitespace-pre-wrap break-words">
         {markdown}
       </pre>
     </Modal>

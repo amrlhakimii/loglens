@@ -63,10 +63,10 @@ export default function App() {
       <header className="border-b border-white/[0.06]">
         <div className="mx-auto max-w-7xl px-4 md:px-6 py-3 flex items-center justify-between">
           <button type="button" onClick={reset} className="font-display text-xl font-extrabold tracking-tight cursor-pointer" aria-label="LogLens home">
-            <span className="text-[#00ADB5]">Log</span>
+            <span className="text-[#4c8dff]">Log</span>
             <span>Lens</span>
           </button>
-          <span className="rounded-full bg-[#00ADB5]/20 text-[#00ADB5] px-3 py-1 text-xs font-medium">
+          <span className="rounded-full bg-[#4c8dff]/20 text-[#4c8dff] px-3 py-1 text-xs font-medium">
             <span aria-hidden="true">🔒 </span>Runs in your browser
           </span>
         </div>
@@ -76,14 +76,14 @@ export default function App() {
         {state.kind === 'idle' && <Landing onFile={onFile} onSample={onSample} error={error} />}
         {state.kind === 'loading' && (
           <div className="mx-auto max-w-2xl" role="status" aria-live="polite">
-            <p className="text-xs font-semibold uppercase tracking-widest text-[#EEEEEE]/60 mb-2">Analysing locally</p>
+            <p className="text-xs font-semibold uppercase tracking-widest text-[#e6edf7]/60 mb-2">Analysing locally</p>
             <p className="font-display text-xl font-bold mb-4 truncate">{state.name}</p>
             {state.bytes > PROGRESS_BAR_MIN_BYTES && (
               <div className="mb-4">
-                <div className="h-2 rounded-full bg-[#393E46] overflow-hidden" role="progressbar" aria-label="Parsing progress" aria-valuemin={0} aria-valuemax={100} aria-valuenow={Math.round(state.progress * 100)}>
-                  <div className="h-full bg-[#00ADB5] transition-all" style={{ width: `${Math.round(state.progress * 100)}%` }} />
+                <div className="h-2 rounded-full bg-[#1e2a44] overflow-hidden" role="progressbar" aria-label="Parsing progress" aria-valuemin={0} aria-valuemax={100} aria-valuenow={Math.round(state.progress * 100)}>
+                  <div className="h-full bg-[#4c8dff] transition-all" style={{ width: `${Math.round(state.progress * 100)}%` }} />
                 </div>
-                <p className="text-xs text-[#EEEEEE]/60 mt-1">{Math.round(state.progress * 100)}%</p>
+                <p className="text-xs text-[#e6edf7]/60 mt-1">{Math.round(state.progress * 100)}%</p>
               </div>
             )}
             <div className="space-y-3">
@@ -98,15 +98,15 @@ export default function App() {
               <EmptyState icon="🤷" title="No recognised events in that file" description="LogLens could not read any events from it.">
                 <div className="text-left max-w-xl">
                   <p className="text-sm font-semibold mb-1">Supported formats</p>
-                  <ul className="list-disc pl-5 text-sm text-[#EEEEEE]/80 mb-4 space-y-1">
+                  <ul className="list-disc pl-5 text-sm text-[#e6edf7]/80 mb-4 space-y-1">
                     <li>Sysmon JSON with flat fields (EventCode or EventID, Image, CommandLine, ...)</li>
                     <li>Winlogbeat / ECS Sysmon JSON (winlog.event_id and winlog.event_data)</li>
                     <li>Get-WinEvent | ConvertTo-Json (Id plus a Message with Key: value lines)</li>
                     <li>Linux auth.log (sshd and sudo, syslog or RFC 3339 timestamps)</li>
                   </ul>
-                  <p className="text-xs text-[#EEEEEE]/60 mb-3">JSON can be one object per line or a single array. EVTX files are not read directly: export them to JSON first.</p>
+                  <p className="text-xs text-[#e6edf7]/60 mb-3">JSON can be one object per line or a single array. EVTX files are not read directly: export them to JSON first.</p>
                   <p className="text-sm font-semibold mb-1">First lines LogLens saw</p>
-                  <pre className="max-w-full overflow-x-auto rounded-xl bg-[#222831] border border-[#393E46] p-3 font-mono text-xs whitespace-pre-wrap break-all">{state.analysis.preview.join('\n') || '(the file is empty)'}</pre>
+                  <pre className="max-w-full overflow-x-auto rounded-xl bg-[#0f1729] border border-[#1e2a44] p-3 font-mono text-xs whitespace-pre-wrap break-all">{state.analysis.preview.join('\n') || '(the file is empty)'}</pre>
                   <div className="mt-4 text-center">
                     <Button onClick={reset}>Try another file</Button>
                   </div>
@@ -118,7 +118,7 @@ export default function App() {
         {state.kind === 'ready' && state.analysis.events.length > 0 && <Workspace key={state.analysis.hash} analysis={state.analysis} isSample={state.isSample} onReset={reset} />}
       </main>
 
-      <footer className="border-t border-white/[0.06] py-5 px-4 text-center text-xs text-[#EEEEEE]/60">
+      <footer className="border-t border-white/[0.06] py-5 px-4 text-center text-xs text-[#e6edf7]/60">
         <p>
           Heuristic rules, validated on invented sample data only. Not a SIEM, not an EDR, not production-grade coverage. Your files are processed in this browser tab and never uploaded.
         </p>

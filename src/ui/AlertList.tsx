@@ -39,7 +39,7 @@ export function AlertList(p: Props) {
 
   return (
     <section aria-labelledby="alerts-heading" className="min-w-0">
-      <h2 id="alerts-heading" className="text-xs font-semibold uppercase tracking-widest text-[#EEEEEE]/60 mb-3">
+      <h2 id="alerts-heading" className="text-xs font-semibold uppercase tracking-widest text-[#e6edf7]/60 mb-3">
         Alerts ({p.findings.length}
         {p.findings.length !== p.total ? ` of ${p.total}` : ''})
       </h2>
@@ -89,15 +89,15 @@ export function AlertList(p: Props) {
                   tabIndex={selected || (!p.selectedId && i === 0) ? 0 : -1}
                   onClick={() => p.onSelect(f.id)}
                   onKeyDown={(e) => move(e, i)}
-                  className={`w-full text-left rounded-2xl p-3 border transition-all cursor-pointer focus:outline-none ${selected ? 'border-[#00ADB5] bg-[#00ADB5]/10' : 'border-white/[0.06] bg-[#393E46]/60 hover:border-[#00ADB5]/40 focus:border-[#00ADB5]'}`}
+                  className={`w-full text-left rounded-2xl p-3 border transition-all cursor-pointer focus:outline-none ${selected ? 'border-[#4c8dff] bg-[#4c8dff]/10' : 'border-white/[0.06] bg-[#1e2a44]/60 hover:border-[#4c8dff]/40 focus:border-[#4c8dff]'}`}
                 >
                   <span className="flex items-center justify-between gap-2 mb-1.5">
                     <SeverityBadge severity={f.severity} />
                     <Badge variant={status === 'new' ? 'muted' : status === 'closed' ? 'success' : status === 'escalated' ? 'danger' : 'accent'}>{STATUS_LABEL[status]}</Badge>
                   </span>
                   <span className="block font-semibold text-sm">{rule.title}</span>
-                  <span className="block text-xs text-[#EEEEEE]/70 mt-0.5 line-clamp-2 break-words">{f.summary}</span>
-                  <span className="block text-xs text-[#EEEEEE]/60 mt-1.5 truncate">
+                  <span className="block text-xs text-[#e6edf7]/70 mt-0.5 line-clamp-2 break-words">{f.summary}</span>
+                  <span className="block text-xs text-[#e6edf7]/60 mt-1.5 truncate">
                     {f.host ?? 'unknown host'} · {f.user ?? 'unknown user'} · {formatTime(f.time)}
                   </span>
                 </button>

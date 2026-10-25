@@ -24,8 +24,8 @@ interface Props {
 
 function RawLine({ id, raw, marked }: { id: number; raw: string; marked?: boolean }) {
   return (
-    <li className={`flex gap-3 px-2 py-1 rounded-lg ${marked ? 'bg-[#00ADB5]/15' : ''}`}>
-      <span className="shrink-0 w-12 text-right text-[#EEEEEE]/60 tabular-nums">{id}</span>
+    <li className={`flex gap-3 px-2 py-1 rounded-lg ${marked ? 'bg-[#4c8dff]/15' : ''}`}>
+      <span className="shrink-0 w-12 text-right text-[#e6edf7]/60 tabular-nums">{id}</span>
       <span className={`${MONO} break-all whitespace-pre-wrap min-w-0`}>{raw}</span>
     </li>
   )
@@ -48,14 +48,14 @@ function Triage({ finding, entry, onSave }: Pick<Props, 'finding' | 'entry' | 'o
 
   return (
     <Card as="section" className="!p-4">
-      <h3 className="text-xs font-semibold uppercase tracking-widest text-[#EEEEEE]/60 mb-3">Triage decision</h3>
+      <h3 className="text-xs font-semibold uppercase tracking-widest text-[#e6edf7]/60 mb-3">Triage decision</h3>
       <fieldset>
         <legend className="sr-only">Status for this alert</legend>
         <div className="flex flex-wrap gap-2">
           {options.map((o) => (
             <label
               key={o}
-              className={`inline-flex items-center gap-2 rounded-xl border px-3 py-2 min-h-11 sm:min-h-0 text-sm cursor-pointer transition-colors ${status === o ? 'border-[#00ADB5] bg-[#00ADB5]/15' : 'border-[#393E46] hover:border-[#00ADB5]/40'}`}
+              className={`inline-flex items-center gap-2 rounded-xl border px-3 py-2 min-h-11 sm:min-h-0 text-sm cursor-pointer transition-colors ${status === o ? 'border-[#4c8dff] bg-[#4c8dff]/15' : 'border-[#1e2a44] hover:border-[#4c8dff]/40'}`}
             >
               <input
                 type="radio"
@@ -66,7 +66,7 @@ function Triage({ finding, entry, onSave }: Pick<Props, 'finding' | 'entry' | 'o
                   setStatus(o)
                   setError(null)
                 }}
-                className="accent-[#00ADB5] cursor-pointer"
+                className="accent-[#4c8dff] cursor-pointer"
               />
               {STATUS_LABEL[o]}
             </label>
@@ -94,7 +94,7 @@ function Triage({ finding, entry, onSave }: Pick<Props, 'finding' | 'entry' | 'o
       </div>
       <div className="mt-3 flex items-center gap-3">
         <Button onClick={save}>Save decision</Button>
-        {savedAt && !error && <span className="text-xs text-[#EEEEEE]/60">Saved in this browser only ({STATUS_LABEL[entry?.status ?? status]})</span>}
+        {savedAt && !error && <span className="text-xs text-[#e6edf7]/60">Saved in this browser only ({STATUS_LABEL[entry?.status ?? status]})</span>}
       </div>
     </Card>
   )
@@ -107,13 +107,13 @@ function Tune({ finding, exclusions, onAddExclusion, onRemoveExclusion, previewH
   const preview = trimmed ? previewHidden(trimmed) : 0
   const mine = exclusions.filter((x) => x.ruleId === rule.id)
   return (
-    <details className="rounded-2xl border border-white/[0.06] bg-[#393E46]/40 p-4">
-      <summary className="text-xs font-semibold uppercase tracking-widest text-[#EEEEEE]/60 cursor-pointer">Tune this rule</summary>
+    <details className="rounded-2xl border border-white/[0.06] bg-[#1e2a44]/40 p-4">
+      <summary className="text-xs font-semibold uppercase tracking-widest text-[#e6edf7]/60 cursor-pointer">Tune this rule</summary>
       <div className="mt-3 space-y-3 text-sm">
         <div>
           <Eyebrow className="mb-1">Built-in allowlist</Eyebrow>
           {rule.allowlist.length ? (
-            <ul className="list-disc pl-5 text-[#EEEEEE]/80 space-y-0.5">
+            <ul className="list-disc pl-5 text-[#e6edf7]/80 space-y-0.5">
               {rule.allowlist.map((a) => (
                 <li key={a} className="break-words">
                   {a}
@@ -121,7 +121,7 @@ function Tune({ finding, exclusions, onAddExclusion, onRemoveExclusion, previewH
               ))}
             </ul>
           ) : (
-            <p className="text-[#EEEEEE]/70">This rule has no allowlist.</p>
+            <p className="text-[#e6edf7]/70">This rule has no allowlist.</p>
           )}
         </div>
         <form
@@ -135,8 +135,8 @@ function Tune({ finding, exclusions, onAddExclusion, onRemoveExclusion, previewH
           <Field label="Add a session-only exclusion" htmlFor={`excl-${finding.id}`}>
             <input id={`excl-${finding.id}`} className={INPUT_CLASS} value={query} onChange={(e) => setQuery(e.target.value)} placeholder="e.g. SourceImage:backup.exe or any text" autoComplete="off" spellCheck={false} />
           </Field>
-          <p className="text-xs text-[#EEEEEE]/60 mt-1">Hides alerts of this rule where any matched line contains the text, or where field:value matches. Lasts until you reload; never saved.</p>
-          {trimmed && <p className="text-xs text-[#EEEEEE]/80 mt-1">This would hide {preview} alert{preview === 1 ? '' : 's'} from this rule.</p>}
+          <p className="text-xs text-[#e6edf7]/60 mt-1">Hides alerts of this rule where any matched line contains the text, or where field:value matches. Lasts until you reload; never saved.</p>
+          {trimmed && <p className="text-xs text-[#e6edf7]/80 mt-1">This would hide {preview} alert{preview === 1 ? '' : 's'} from this rule.</p>}
           <Button type="submit" variant="secondary" size="sm" className="mt-2" disabled={!trimmed}>
             Add exclusion
           </Button>
@@ -144,7 +144,7 @@ function Tune({ finding, exclusions, onAddExclusion, onRemoveExclusion, previewH
         {mine.length > 0 && (
           <ul className="space-y-1" aria-label="Active exclusions">
             {mine.map((x) => (
-              <li key={x.query} className="flex items-center justify-between gap-2 rounded-lg bg-[#222831] px-3 py-1.5">
+              <li key={x.query} className="flex items-center justify-between gap-2 rounded-lg bg-[#0f1729] px-3 py-1.5">
                 <code className="text-xs break-all">{x.query}</code>
                 <Button variant="ghost" size="sm" onClick={() => onRemoveExclusion(x)} aria-label={`Remove exclusion ${x.query}`}>
                   Remove
@@ -176,7 +176,7 @@ export function AlertDetail(p: Props) {
           <div className="min-w-0">
             <div className="flex flex-wrap items-center gap-2 mb-2">
               <SeverityBadge severity={finding.severity} />
-              <a href={attackUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-[#00ADB5]/20 text-[#00ADB5] hover:bg-[#00ADB5]/30 transition-colors">
+              <a href={attackUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-[#4c8dff]/20 text-[#4c8dff] hover:bg-[#4c8dff]/30 transition-colors">
                 {rule.attack.id} {rule.attack.name}
               </a>
               <Badge variant="muted">rule v{rule.version}</Badge>
@@ -189,8 +189,8 @@ export function AlertDetail(p: Props) {
             Close
           </Button>
         </div>
-        <p className="mt-2 text-sm text-[#EEEEEE]/90 break-words">{finding.summary}</p>
-        {finding.detail && <p className={`mt-2 ${MONO} bg-[#222831] rounded-xl p-3 break-all whitespace-pre-wrap`}>{finding.detail}</p>}
+        <p className="mt-2 text-sm text-[#e6edf7]/90 break-words">{finding.summary}</p>
+        {finding.detail && <p className={`mt-2 ${MONO} bg-[#0f1729] rounded-xl p-3 break-all whitespace-pre-wrap`}>{finding.detail}</p>}
         <dl className="mt-3 grid grid-cols-3 gap-3 text-sm">
           {[
             ['Host', finding.host ?? 'unknown'],
@@ -198,7 +198,7 @@ export function AlertDetail(p: Props) {
             ['Time', formatTime(finding.time)],
           ].map(([k, v]) => (
             <div key={k} className="min-w-0">
-              <dt className="text-xs uppercase tracking-wider text-[#EEEEEE]/60">{k}</dt>
+              <dt className="text-xs uppercase tracking-wider text-[#e6edf7]/60">{k}</dt>
               <dd className="break-words">{v}</dd>
             </div>
           ))}
@@ -206,14 +206,14 @@ export function AlertDetail(p: Props) {
       </Card>
 
       <Card as="section" className="!p-4 md:!p-5">
-        <h3 className="text-xs font-semibold uppercase tracking-widest text-[#EEEEEE]/60 mb-2">What this rule looks for</h3>
-        <p className="text-sm text-[#EEEEEE]/90">{rule.explanation}</p>
+        <h3 className="text-xs font-semibold uppercase tracking-widest text-[#e6edf7]/60 mb-2">What this rule looks for</h3>
+        <p className="text-sm text-[#e6edf7]/90">{rule.explanation}</p>
         <details open className="mt-3">
           <summary className="text-sm font-semibold cursor-pointer">Why does this matter?</summary>
-          <p className="mt-2 text-sm text-[#EEEEEE]/90 leading-relaxed">{rule.whyItMatters}</p>
+          <p className="mt-2 text-sm text-[#e6edf7]/90 leading-relaxed">{rule.whyItMatters}</p>
         </details>
-        <h3 className="text-xs font-semibold uppercase tracking-widest text-[#EEEEEE]/60 mt-4 mb-2">What to check next</h3>
-        <ol className="list-decimal pl-5 space-y-1 text-sm text-[#EEEEEE]/90">
+        <h3 className="text-xs font-semibold uppercase tracking-widest text-[#e6edf7]/60 mt-4 mb-2">What to check next</h3>
+        <ol className="list-decimal pl-5 space-y-1 text-sm text-[#e6edf7]/90">
           {rule.nextSteps.map((s) => (
             <li key={s}>{s}</li>
           ))}
@@ -221,7 +221,7 @@ export function AlertDetail(p: Props) {
       </Card>
 
       <Card as="section" className="!p-4 md:!p-5">
-        <h3 className="text-xs font-semibold uppercase tracking-widest text-[#EEEEEE]/60 mb-2">Matched fields</h3>
+        <h3 className="text-xs font-semibold uppercase tracking-widest text-[#e6edf7]/60 mb-2">Matched fields</h3>
         {primary ? (
           <table className="w-full text-sm">
             <caption className="sr-only">Fields of the first matched event; matched fields are marked</caption>
@@ -231,8 +231,8 @@ export function AlertDetail(p: Props) {
                 .map(([k, v]) => {
                   const hit = finding.highlight.includes(k)
                   return (
-                    <tr key={k} className={hit ? 'bg-[#00ADB5]/15' : ''}>
-                      <th scope="row" className="text-left align-top font-medium py-1 pr-3 whitespace-nowrap text-[#EEEEEE]/70">
+                    <tr key={k} className={hit ? 'bg-[#4c8dff]/15' : ''}>
+                      <th scope="row" className="text-left align-top font-medium py-1 pr-3 whitespace-nowrap text-[#e6edf7]/70">
                         {hit && <span aria-label="matched">▶ </span>}
                         {k}
                       </th>
@@ -243,32 +243,32 @@ export function AlertDetail(p: Props) {
             </tbody>
           </table>
         ) : (
-          <p className="text-sm text-[#EEEEEE]/70">Event not available.</p>
+          <p className="text-sm text-[#e6edf7]/70">Event not available.</p>
         )}
         {parent && (
           <div className="mt-3 text-sm">
             <Eyebrow className="mb-1">Parent process</Eyebrow>
             <p className={`${MONO} break-all`}>{parent.parentImage}</p>
             {parent.creator ? (
-              <p className="text-xs text-[#EEEEEE]/70 mt-1 break-all">
+              <p className="text-xs text-[#e6edf7]/70 mt-1 break-all">
                 Started earlier on line {parent.creator.id}: <span className={MONO}>{parent.creator.fields.CommandLine}</span>
               </p>
             ) : (
-              <p className="text-xs text-[#EEEEEE]/60 mt-1">No earlier event in this file shows how the parent was started.</p>
+              <p className="text-xs text-[#e6edf7]/60 mt-1">No earlier event in this file shows how the parent was started.</p>
             )}
           </div>
         )}
       </Card>
 
       <Card as="section" className="!p-4 md:!p-5">
-        <h3 className="text-xs font-semibold uppercase tracking-widest text-[#EEEEEE]/60 mb-2">Matched raw lines ({finding.eventIds.length})</h3>
+        <h3 className="text-xs font-semibold uppercase tracking-widest text-[#e6edf7]/60 mb-2">Matched raw lines ({finding.eventIds.length})</h3>
         <ul className="space-y-0.5" aria-label="Matched raw lines">
           {matched.map((e) => (
             <RawLine key={e.id} id={e.id} raw={e.raw} marked />
           ))}
         </ul>
-        {finding.eventIds.length > SHOWN_MATCHED && <p className="text-xs text-[#EEEEEE]/60 mt-2">+{finding.eventIds.length - SHOWN_MATCHED} more matched lines not shown.</p>}
-        <h3 className="text-xs font-semibold uppercase tracking-widest text-[#EEEEEE]/60 mt-4 mb-2">Surrounding events (±5)</h3>
+        {finding.eventIds.length > SHOWN_MATCHED && <p className="text-xs text-[#e6edf7]/60 mt-2">+{finding.eventIds.length - SHOWN_MATCHED} more matched lines not shown.</p>}
+        <h3 className="text-xs font-semibold uppercase tracking-widest text-[#e6edf7]/60 mt-4 mb-2">Surrounding events (±5)</h3>
         <ul className="space-y-0.5" aria-label="Surrounding events">
           {ctx.map((e) => (
             <RawLine key={e.id} id={e.id} raw={e.raw} marked={matchedSet.has(e.id)} />

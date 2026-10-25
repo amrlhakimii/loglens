@@ -89,7 +89,7 @@ export function Workspace({ analysis, isSample, onReset }: Props) {
     <div className="space-y-4 animate-fade-up">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div className="min-w-0">
-          <p className="text-xs font-semibold uppercase tracking-widest text-[#EEEEEE]/60">Analysing</p>
+          <p className="text-xs font-semibold uppercase tracking-widest text-[#e6edf7]/60">Analysing</p>
           <p className="font-display text-lg font-bold truncate">{analysis.fileName}</p>
         </div>
         <div className="flex gap-2">
@@ -125,7 +125,7 @@ export function Workspace({ analysis, isSample, onReset }: Props) {
               <>
                 {sheetOpen && <div className="md:hidden fixed inset-0 z-30" style={{ background: 'rgba(10,14,20,0.6)' }} onClick={() => setSheetOpen(false)} aria-hidden="true" />}
                 <div
-                  className={`${sheetOpen ? '' : 'max-md:hidden'} max-md:fixed max-md:inset-x-0 max-md:bottom-0 max-md:z-40 max-md:max-h-[85dvh] max-md:overflow-y-auto max-md:rounded-t-[20px] max-md:p-4 max-md:animate-sheet-in max-md:bg-[#2d3440] md:sticky md:top-4 md:max-h-[calc(100dvh-2rem)] md:overflow-y-auto min-w-0`}
+                  className={`${sheetOpen ? '' : 'max-md:hidden'} max-md:fixed max-md:inset-x-0 max-md:bottom-0 max-md:z-40 max-md:max-h-[85dvh] max-md:overflow-y-auto max-md:rounded-t-[20px] max-md:p-4 max-md:animate-sheet-in max-md:bg-[#1a2540] md:sticky md:top-4 md:max-h-[calc(100dvh-2rem)] md:overflow-y-auto min-w-0`}
                 >
                   <AlertDetail
                     finding={selected}

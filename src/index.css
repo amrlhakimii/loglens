@@ -5,10 +5,10 @@
 @import "@fontsource/syne/800.css";
 
 @theme {
-  --color-primary: #222831;
-  --color-secondary: #393E46;
-  --color-accent: #00ADB5;
-  --color-light: #EEEEEE;
+  --color-primary: #0f1729;
+  --color-secondary: #1e2a44;
+  --color-accent: #4c8dff;
+  --color-light: #e6edf7;
   /* Body font: system stack (no third-party font requests). Display font: Syne, self-hosted via @fontsource. */
   --font-sans: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
   --font-display: 'Syne', system-ui, sans-serif;
@@ -20,8 +20,8 @@
 
 body {
   margin: 0;
-  background-color: #222831;
-  color: #EEEEEE;
+  background-color: #0f1729;
+  color: #e6edf7;
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -47,8 +47,8 @@ input, select, textarea { font-size: 16px !important; }
 
 ::-webkit-scrollbar { width: 4px; height: 4px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: #393E46; border-radius: 4px; }
-::-webkit-scrollbar-thumb:hover { background: #00ADB5; }
+::-webkit-scrollbar-thumb { background: #1e2a44; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #4c8dff; }
 
 @keyframes fade-up {
   from { opacity: 0; transform: translateY(8px); }
@@ -78,7 +78,7 @@ input, select, textarea { font-size: 16px !important; }
 }
 
 /* Interactive elements show focus with a border colour, never a ring. */
-.focus-border:focus-visible, .focus-border:focus { border-color: #00ADB5; }
+.focus-border:focus-visible, .focus-border:focus { border-color: #4c8dff; }
 
 @media (prefers-reduced-motion: reduce) {
   * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }

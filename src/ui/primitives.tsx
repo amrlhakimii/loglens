@@ -1,7 +1,7 @@
 import { useEffect, useRef, type ReactNode } from 'react'
 import type { Severity } from '../types'
 
-const GLASS = { background: 'rgba(57,62,70,0.6)', backdropFilter: 'blur(8px)', border: '1px solid rgba(238,238,238,0.06)', boxShadow: '0 4px 24px rgba(0,0,0,0.2)' } as const
+const GLASS = { background: 'rgba(30,42,68,0.6)', backdropFilter: 'blur(8px)', border: '1px solid rgba(230,237,247,0.06)', boxShadow: '0 4px 24px rgba(0,0,0,0.2)' } as const
 
 export function Card({ children, className = '', as: Tag = 'div' }: { children: ReactNode; className?: string; as?: 'div' | 'section' | 'article' }) {
   return (
@@ -13,17 +13,17 @@ export function Card({ children, className = '', as: Tag = 'div' }: { children: 
 
 export function Eyebrow({ children, className = '', id }: { children: ReactNode; className?: string; id?: string }) {
   return (
-    <p id={id} className={`text-xs font-semibold uppercase tracking-widest text-[#EEEEEE]/60 ${className}`}>
+    <p id={id} className={`text-xs font-semibold uppercase tracking-widest text-[#e6edf7]/60 ${className}`}>
       {children}
     </p>
   )
 }
 
 const BUTTON_VARIANTS = {
-  primary: 'bg-gradient-to-r from-[#00ADB5] to-[#008f96] hover:from-[#00c2cb] hover:to-[#00ADB5] text-[#222831] font-semibold shadow-[0_4px_14px_rgba(0,173,181,0.3)]',
-  secondary: 'bg-[#393E46]/80 hover:bg-[#44494f] text-[#EEEEEE] border border-white/8 focus:border-[#00ADB5]',
+  primary: 'bg-gradient-to-r from-[#4c8dff] to-[#2f6fe0] hover:from-[#6aa3ff] hover:to-[#4c8dff] text-[#0f1729] font-semibold shadow-[0_4px_14px_rgba(76,141,255,0.3)]',
+  secondary: 'bg-[#1e2a44]/80 hover:bg-[#2a3a5c] text-[#e6edf7] border border-white/8 focus:border-[#4c8dff]',
   danger: 'bg-red-500/15 hover:bg-red-500/25 text-red-400 border border-red-500/20',
-  ghost: 'bg-transparent hover:bg-white/5 text-[#EEEEEE]/60 hover:text-[#EEEEEE]',
+  ghost: 'bg-transparent hover:bg-white/5 text-[#e6edf7]/60 hover:text-[#e6edf7]',
 } as const
 const BUTTON_SIZES = {
   sm: 'px-3 py-1.5 min-h-11 sm:min-h-0 text-sm rounded-lg',
@@ -47,11 +47,11 @@ export function Button({
 }
 
 const BADGE_VARIANTS = {
-  accent: 'bg-[#00ADB5]/20 text-[#00ADB5]',
+  accent: 'bg-[#4c8dff]/20 text-[#4c8dff]',
   success: 'bg-green-500/20 text-green-400',
   warning: 'bg-yellow-500/20 text-yellow-400',
   danger: 'bg-red-500/20 text-red-400',
-  muted: 'bg-[#EEEEEE]/10 text-[#EEEEEE]/70',
+  muted: 'bg-[#e6edf7]/10 text-[#e6edf7]/70',
 } as const
 
 export function Badge({ children, variant = 'muted' }: { children: ReactNode; variant?: keyof typeof BADGE_VARIANTS }) {
@@ -62,12 +62,12 @@ export function EmptyState({ icon, title, description, children }: { icon?: Reac
   return (
     <div className="flex flex-col items-center justify-center py-16 text-center select-none">
       {icon && (
-        <div className="text-5xl mb-4 w-20 h-20 rounded-2xl flex items-center justify-center" style={{ background: 'rgba(0,173,181,0.08)', border: '1px solid rgba(0,173,181,0.12)' }} aria-hidden="true">
+        <div className="text-5xl mb-4 w-20 h-20 rounded-2xl flex items-center justify-center" style={{ background: 'rgba(76,141,255,0.08)', border: '1px solid rgba(76,141,255,0.12)' }} aria-hidden="true">
           {icon}
         </div>
       )}
-      <p className="text-[#EEEEEE]/80 font-semibold text-base mb-1">{title}</p>
-      {description && <p className="text-[#EEEEEE]/60 text-sm max-w-xs">{description}</p>}
+      <p className="text-[#e6edf7]/80 font-semibold text-base mb-1">{title}</p>
+      {description && <p className="text-[#e6edf7]/60 text-sm max-w-xs">{description}</p>}
       {children && <div className="mt-4">{children}</div>}
     </div>
   )
@@ -80,7 +80,7 @@ export interface TabDef {
 
 export function Tabs({ tabs, active, onChange, label }: { tabs: TabDef[]; active: string; onChange: (id: string) => void; label: string }) {
   return (
-    <div className="flex gap-1 bg-[#222831] rounded-xl p-1 overflow-x-auto" role="tablist" aria-label={label}>
+    <div className="flex gap-1 bg-[#0f1729] rounded-xl p-1 overflow-x-auto" role="tablist" aria-label={label}>
       {tabs.map((tab) => (
         <button
           key={tab.id}
@@ -91,7 +91,7 @@ export function Tabs({ tabs, active, onChange, label }: { tabs: TabDef[]; active
           aria-controls={`panel-${tab.id}`}
           onClick={() => onChange(tab.id)}
           className={`shrink-0 flex-1 px-3 py-2 min-h-11 sm:min-h-0 rounded-lg text-sm font-medium transition-all cursor-pointer whitespace-nowrap ${
-            active === tab.id ? 'bg-[#00ADB5] text-[#222831]' : 'text-[#EEEEEE]/70 hover:text-[#EEEEEE]'
+            active === tab.id ? 'bg-[#4c8dff] text-[#0f1729]' : 'text-[#e6edf7]/70 hover:text-[#e6edf7]'
           }`}
         >
           {tab.label}
@@ -136,11 +136,11 @@ export function Modal({ title, onClose, children, wide = false }: { title: strin
         aria-modal="true"
         aria-label={title}
         className={`relative w-full ${wide ? 'md:max-w-3xl' : 'md:max-w-md'} max-h-[90dvh] flex flex-col rounded-t-[20px] md:rounded-[20px] animate-sheet-in md:animate-modal-in`}
-        style={{ background: '#2d3440', border: '1px solid rgba(0,173,181,0.2)', boxShadow: '0 -8px 40px rgba(0,0,0,0.6)', overflow: 'hidden' }}
+        style={{ background: '#1a2540', border: '1px solid rgba(76,141,255,0.2)', boxShadow: '0 -8px 40px rgba(0,0,0,0.6)', overflow: 'hidden' }}
       >
         <div className="flex items-center justify-between gap-3 px-5 pt-5 pb-3">
           <h2 className="font-display text-lg font-bold">{title}</h2>
-          <button ref={closeRef} type="button" onClick={onClose} aria-label="Close" className="flex h-9 w-9 items-center justify-center rounded-full bg-white/5 text-[#EEEEEE]/70 hover:text-[#EEEEEE] hover:bg-white/10 cursor-pointer transition-colors">
+          <button ref={closeRef} type="button" onClick={onClose} aria-label="Close" className="flex h-9 w-9 items-center justify-center rounded-full bg-white/5 text-[#e6edf7]/70 hover:text-[#e6edf7] hover:bg-white/10 cursor-pointer transition-colors">
             <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
               <path d="M3 3l10 10M13 3L3 13" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
             </svg>
@@ -155,7 +155,7 @@ export function Modal({ title, onClose, children, wide = false }: { title: strin
 export function Toast({ message }: { message: string | null }) {
   if (!message) return null
   return (
-    <div role="status" className="fixed top-5 left-1/2 -translate-x-1/2 rounded-full px-5 py-3 text-sm text-[#EEEEEE] backdrop-blur-md" style={{ zIndex: 10000, background: 'rgba(20,20,24,0.85)', border: '1px solid rgba(255,255,255,0.08)', animation: 'toast-in 0.2s ease-out' }}>
+    <div role="status" className="fixed top-5 left-1/2 -translate-x-1/2 rounded-full px-5 py-3 text-sm text-[#e6edf7] backdrop-blur-md" style={{ zIndex: 10000, background: 'rgba(20,20,24,0.85)', border: '1px solid rgba(255,255,255,0.08)', animation: 'toast-in 0.2s ease-out' }}>
       {message}
     </div>
   )
@@ -196,7 +196,7 @@ export function SeverityBadge({ severity }: { severity: Severity }) {
 export function Field({ label, htmlFor, children }: { label: string; htmlFor: string; children: ReactNode }) {
   return (
     <div>
-      <label htmlFor={htmlFor} className="block text-xs text-[#EEEEEE]/60 mb-1 uppercase tracking-wider">
+      <label htmlFor={htmlFor} className="block text-xs text-[#e6edf7]/60 mb-1 uppercase tracking-wider">
         {label}
       </label>
       {children}
