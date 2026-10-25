@@ -1,23 +1,31 @@
-import type { Rule } from '../types'
-import { EVENT_PROCESS_CREATE, RISKY_PARENTS, endsWithAny, field, includesAny, lower, suspiciousPath } from './util'
+import type { LogEvent, Rule } from '../types'
+import { EVENT_PROCESS_CREATE, endsWithAny, field, includesAny, isAttackLauncherParent, lower } from './util'
 
 /** Software deployment agents that create scheduled tasks as part of normal operation. Tune per environment. */
 export const SCHTASKS_PARENT_ALLOWLIST = ['\\ccmexec.exe', '\\msiexec.exe', '\\trustedinstaller.exe'] as const
 
-function isRisky(e: Parameters<Rule['match']>[0]): boolean {
+/** Folders where a scheduled task target is suspicious: user-writable locations. */
+const WRITABLE_TARGETS = ['\\users\\', '\\appdata\\', '\\temp\\', '\\programdata\\', '\\public\\'] as const
+
+/** Count of independent risk signals: SYSTEM, user-writable target, Office/browser/script-host parent. Shells are not a signal. */
+export function schtasksSignals(e: LogEvent): string[] {
   const cmd = lower(field(e, 'CommandLine'))
-  return cmd.includes('/ru system') || suspiciousPath(cmd) || endsWithAny(field(e, 'ParentImage'), RISKY_PARENTS)
+  const signals: string[] = []
+  if (/\/ru\s+"?(?:nt authority\\)?system\b/.test(cmd)) signals.push('runs as SYSTEM')
+  if (includesAny(cmd, WRITABLE_TARGETS)) signals.push('target in a user-writable folder')
+  if (isAttackLauncherParent(field(e, 'ParentImage'))) signals.push('launched by Office, a browser or a script host')
+  return signals
 }
 
 export const schtasksCreate: Rule = {
   id: 'schtasks-create',
-  version: '1.0.0',
+  version: '1.1.0',
   title: 'Scheduled Task Created via schtasks',
   attack: { id: 'T1053.005', name: 'Scheduled Task/Job: Scheduled Task' },
-  severity: 'medium',
-  explanation: 'schtasks.exe was run with /create. Severity rises to high when the task runs as SYSTEM, points into a user-writable folder, or was launched by a script host, Office or a shell.',
+  severity: 'low',
+  explanation: 'schtasks.exe was run with /create. A plain create is low. Each risk signal raises it: medium with one signal, high with two or more. Signals are: runs as SYSTEM (/ru SYSTEM), task target in a user-writable folder (Users, AppData, Temp, ProgramData, Public), or launched by Office, a browser or a script host. A shell such as cmd.exe or PowerShell as parent is not a signal on its own.',
   whyItMatters:
-    'Scheduled tasks let Windows run a program on a timer or at logon. Attackers create them so their program keeps coming back after a reboot, and sometimes to run it with SYSTEM rights. Admins and installers create tasks too, so the rule looks at who launched it, what it runs and where that program lives. A task that launches something from a temp or public folder as SYSTEM deserves a close look. A plain query of existing tasks does not trigger this rule.',
+    'Scheduled tasks let Windows run a program on a timer or at logon. Attackers create them so their program keeps coming back after a reboot, and sometimes to run it with SYSTEM rights. Admins and installers create tasks too, so the rule looks at who launched it, what it runs and where that program lives. A task that launches something from a temp or public folder as SYSTEM deserves a close look, while a plain task typed into a shell is usually routine. A plain query of existing tasks does not trigger this rule.',
   nextSteps: [
     'Read the /tr value: what program will run, and is that file in a user-writable folder?',
     'Check /ru: running as SYSTEM raises the stakes.',
@@ -33,11 +41,11 @@ export const schtasksCreate: Rule = {
     return !endsWithAny(field(e, 'ParentImage'), SCHTASKS_PARENT_ALLOWLIST)
   },
   describe(e) {
-    const risky = isRisky(e)
+    const signals = schtasksSignals(e)
     return {
-      summary: risky ? 'A scheduled task was created in a risky way (SYSTEM, user-writable path, or risky parent).' : 'A scheduled task was created.',
+      summary: signals.length ? `A scheduled task was created (${signals.join('; ')}).` : 'A scheduled task was created (no risk signals).',
       fields: ['Image', 'CommandLine', 'ParentImage'],
-      severity: risky ? 'high' : 'medium',
+      severity: signals.length >= 2 ? 'high' : signals.length === 1 ? 'medium' : 'low',
     }
   },
 }

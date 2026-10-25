@@ -101,7 +101,7 @@ Next steps:
 - User: WIN-LAB01\\labuser
 - Status: Closed (benign)
 - Note: Planned task | confirmed with owner
-- Why it fired: A scheduled task was created in a risky way (SYSTEM, user-writable path, or risky parent).
+- Why it fired: A scheduled task was created (runs as SYSTEM; target in a user-writable folder).
 
 Matched lines:
 
@@ -171,10 +171,11 @@ These were added in this session with "Tune this rule" and are not saved:
 
 | Rule | Version | ATT&CK | Default severity |
 | --- | --- | --- | --- |
-| PowerShell Encoded Command (powershell-encoded-command) | 1.0.0 | T1059.001 | medium |
-| Suspicious LSASS Memory Access (lsass-memory-access) | 1.0.0 | T1003.001 | high |
+| PowerShell Encoded Command (powershell-encoded-command) | 1.1.0 | T1059.001 | medium |
+| PowerShell Download-and-Execute Cradle (powershell-download-cradle) | 1.0.0 | T1059.001 | medium |
+| Suspicious LSASS Memory Access (lsass-memory-access) | 1.1.0 | T1003.001 | high |
 | LSASS Dump via comsvcs.dll MiniDump (comsvcs-minidump) | 1.0.0 | T1003.001 | high |
-| Scheduled Task Created via schtasks (schtasks-create) | 1.0.0 | T1053.005 | medium |
+| Scheduled Task Created via schtasks (schtasks-create) | 1.1.0 | T1053.005 | low |
 | Registry Run Key Persistence (registry-run-key) | 1.0.0 | T1547.001 | medium |
 | SSH Brute Force (ssh-brute-force) | 1.0.0 | T1110 | high |
 

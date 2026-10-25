@@ -74,10 +74,24 @@ describe('schtasks-create', () => {
     expect(r).toHaveLength(1)
     expect(r[0].severity).toBe('high')
   })
-  it('true positive: plain create is medium', () => {
+  it('true positive: plain create is low (still listed). Was medium before 1.1.0', () => {
     const e = sysmonEvent({ ...img, ParentImage: 'C:\\Windows\\explorer.exe', CommandLine: 'schtasks /create /tn Backup /tr "C:\\Program Files\\App\\b.exe" /sc daily' })
     const r = detect([e]).findings
-    expect(r[0].severity).toBe('medium')
+    expect(r[0].severity).toBe('low')
+  })
+  const sev = (parent: string, cmd: string) => detect([sysmonEvent({ ...img, ParentImage: parent, CommandLine: cmd })]).findings[0]?.severity
+  it('interactive shells and explorer as parent are not risk signals', () => {
+    for (const p of ['cmd.exe', 'powershell.exe', 'pwsh.exe']) expect(sev(`C:\\Windows\\System32\\${p}`, 'schtasks /create /tn X /tr D:\\s\\b.cmd /sc daily')).toBe('low')
+  })
+  it('one signal is medium: SYSTEM, writable target, or Office/browser/script-host parent', () => {
+    expect(sev('C:\\Windows\\System32\\cmd.exe', 'schtasks /create /tn X /tr D:\\s\\b.cmd /sc daily /ru SYSTEM')).toBe('medium')
+    expect(sev('C:\\Windows\\System32\\cmd.exe', 'schtasks /create /tn X /tr C:\\Users\\bob\\AppData\\r.exe /sc daily')).toBe('medium')
+    expect(sev('C:\\ProgramData\\x.exe', 'schtasks /create /tn X /tr C:\\ProgramData\\r.exe /sc daily')).toBe('medium')
+    expect(sev('C:\\Program Files\\Microsoft Office\\root\\Office16\\WINWORD.EXE', 'schtasks /create /tn X /tr D:\\s\\b.cmd /sc daily')).toBe('medium')
+    expect(sev('C:\\Windows\\System32\\wscript.exe', 'schtasks /create /tn X /tr D:\\s\\b.cmd /sc daily')).toBe('medium')
+  })
+  it('two or more signals are high', () => {
+    expect(sev('C:\\Program Files\\Microsoft Office\\root\\Office16\\WINWORD.EXE', 'schtasks /create /tn X /tr C:\\Users\\Public\\r.exe /sc daily /ru "NT AUTHORITY\\SYSTEM"')).toBe('high')
   })
   it('false positive: query is not a create', () => {
     expect(hit('schtasks-create', { ...img, CommandLine: 'schtasks /query /fo LIST' })).toBe(false)

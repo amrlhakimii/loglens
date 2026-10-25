@@ -21,3 +21,24 @@ export const suspiciousPath = (s: string): boolean => includesAny(s, SUSPICIOUS_
 
 /** Parents that are common launchers for attacker one-liners. */
 export const RISKY_PARENTS = ['\\cmd.exe', '\\powershell.exe', '\\pwsh.exe', '\\wscript.exe', '\\cscript.exe', '\\mshta.exe', '\\rundll32.exe', '\\winword.exe', '\\excel.exe'] as const
+
+/** Office apps, browsers and script hosts: parents that normally have no reason to spawn admin tooling. */
+export const ATTACK_LAUNCHER_PARENTS = [
+  '\\winword.exe', '\\excel.exe', '\\powerpnt.exe', '\\outlook.exe', '\\onenote.exe', '\\msaccess.exe', '\\mspub.exe',
+  '\\chrome.exe', '\\msedge.exe', '\\firefox.exe', '\\iexplore.exe', '\\brave.exe',
+  '\\wscript.exe', '\\cscript.exe', '\\mshta.exe',
+] as const
+export const isAttackLauncherParent = (parentImage: string): boolean => endsWithAny(parentImage, ATTACK_LAUNCHER_PARENTS)
+
+/** Normalise a Windows path for comparison: lower case, forward slashes to backslashes. */
+export const normPath = (s: string): string => lower(s).replace(/\//g, '\\').replace(/^"/, '')
+
+/**
+ * True when `path` ends with one of `fileNames` (e.g. "\\csfalconservice.exe") AND sits under one of
+ * `protectedPrefixes`. Paths containing "\..\" are never trusted. Case-insensitive.
+ */
+export function isTrustedBinary(path: string, fileNames: readonly string[], protectedPrefixes: readonly string[]): boolean {
+  const p = normPath(path)
+  if (p.includes('\\..\\')) return false
+  return fileNames.some((n) => p.endsWith(n)) && protectedPrefixes.some((x) => p.startsWith(x))
+}
