@@ -80,6 +80,11 @@ input, select, textarea { font-size: 16px !important; }
 /* Interactive elements show focus with a border colour, never a ring. */
 .focus-border:focus-visible, .focus-border:focus { border-color: #4c8dff; }
 
+:focus-visible {
+  outline: 2px solid #67e8f9;
+  outline-offset: 3px;
+}
+
 @media (prefers-reduced-motion: reduce) {
   * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
 }

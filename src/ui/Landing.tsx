@@ -8,9 +8,11 @@ interface Props {
   onFile: (file: File) => void
   onSample: (key: SampleKey) => void
   error?: string | null
+  headingAs?: 'h1' | 'h2'
 }
 
-export function Landing({ onFile, onSample, error }: Props) {
+export function Landing({ onFile, onSample, error, headingAs = 'h1' }: Props) {
+  const Heading = headingAs
   const input = useRef<HTMLInputElement>(null)
   const [over, setOver] = useState(false)
 
@@ -32,9 +34,9 @@ export function Landing({ onFile, onSample, error }: Props) {
     >
       <div className="text-center pt-6 md:pt-12 pb-8">
         <Eyebrow className="mb-3">Browser log analyzer</Eyebrow>
-        <h1 id="landing-title" className="font-display text-3xl md:text-5xl font-extrabold tracking-tight">
+        <Heading id="landing-title" className="font-display text-3xl md:text-5xl font-extrabold tracking-tight">
           Drop in a log. See what looks wrong, <span className="text-[#4c8dff]">and why.</span>
-        </h1>
+        </Heading>
         <p className="mt-4 text-[#e6edf7]/70 max-w-xl mx-auto">
           LogLens runs a handful of explainable detection rules over a Sysmon or Linux auth log, shows a timeline, and lets you practise the real SOC decision: close, investigate or escalate.
         </p>

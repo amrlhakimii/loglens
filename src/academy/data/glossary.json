@@ -1,0 +1,710 @@
+[
+  {
+    "term": "Access control",
+    "definition": "A safeguard that permits or denies use of resources according to identity, policy, context, and approved authority.",
+    "plainEnglish": "The rules and checks that decide who or what may do something.",
+    "relatedModuleIds": ["cyber-foundations", "enterprise-it", "application-security", "cloud-security"]
+  },
+  {
+    "term": "Acquisition",
+    "definition": "The controlled collection or copying of digital evidence using a documented method that supports integrity and repeatability.",
+    "plainEnglish": "Making a carefully recorded evidence copy before examining it.",
+    "relatedModuleIds": ["digital-forensics"]
+  },
+  {
+    "term": "Alert",
+    "definition": "A notification that defined conditions in observed data were met and warrant review or automated handling.",
+    "plainEnglish": "A signal selected for attention, not proof that an attack happened.",
+    "relatedModuleIds": ["telemetry-siem", "incident-response", "detection-engineering"]
+  },
+  {
+    "term": "Allowlist",
+    "definition": "A policy construct that permits specified entities or activities while other cases are denied, restricted, or evaluated separately.",
+    "plainEnglish": "An approved list, which must be kept narrow and current.",
+    "relatedModuleIds": ["network-security", "detection-engineering"]
+  },
+  {
+    "term": "API",
+    "definition": "An Application Programming Interface is a defined mechanism through which software requests data or operations from another software component.",
+    "plainEnglish": "A documented service counter that one program uses to ask another program for something.",
+    "relatedModuleIds": ["application-security", "automation"]
+  },
+  {
+    "term": "Application security",
+    "definition": "The practices used to manage security risk throughout the design, development, deployment, operation, and retirement of software.",
+    "plainEnglish": "Building and running software so it resists misuse and can be trusted.",
+    "relatedModuleIds": ["application-security", "security-engineering-operations"]
+  },
+  {
+    "term": "Asset",
+    "definition": "Information, technology, people, services, processes, facilities, or reputation that have value to an organization.",
+    "plainEnglish": "Something worth protecting.",
+    "relatedModuleIds": ["cyber-foundations", "enterprise-it", "vulnerability-management"]
+  },
+  {
+    "term": "Attack surface",
+    "definition": "The set of reachable interfaces, pathways, identities, components, and operations through which a system could be affected.",
+    "plainEnglish": "All the places where someone or something can interact with a system.",
+    "relatedModuleIds": ["network-security", "application-security", "cloud-security"]
+  },
+  {
+    "term": "Authentication",
+    "definition": "The process of verifying a claimed identity using one or more credentials or factors.",
+    "plainEnglish": "Checking that an identity is who or what it claims to be.",
+    "relatedModuleIds": ["enterprise-it", "application-security", "cloud-security"]
+  },
+  {
+    "term": "Authorization",
+    "definition": "The decision and enforcement process that determines whether an authenticated or known identity may perform an action on a resource.",
+    "plainEnglish": "Deciding what an identity is allowed to do.",
+    "relatedModuleIds": ["enterprise-it", "application-security", "cloud-security"]
+  },
+  {
+    "term": "Availability",
+    "definition": "The property that information and services are accessible and usable by authorized entities when required.",
+    "plainEnglish": "Keeping a service ready when legitimate users need it.",
+    "relatedModuleIds": ["cyber-foundations", "incident-response", "critical-infrastructure-readiness"]
+  },
+  {
+    "term": "Baseline",
+    "definition": "A documented description or measurement of expected configuration, performance, or behavior for a defined population and period.",
+    "plainEnglish": "A scoped picture of what normal or approved usually looks like.",
+    "relatedModuleIds": ["telemetry-siem", "threat-hunting", "security-engineering-operations"]
+  },
+  {
+    "term": "Chain of custody",
+    "definition": "A chronological record of evidence collection, control, access, transfer, storage, and disposition.",
+    "plainEnglish": "The complete sign-in sheet showing who handled evidence and how.",
+    "relatedModuleIds": ["digital-forensics", "incident-response"]
+  },
+  {
+    "term": "CIA triad",
+    "definition": "A foundational model grouping security objectives into Confidentiality, Integrity, and Availability.",
+    "plainEnglish": "Keep information appropriately secret, accurate, and ready to use.",
+    "relatedModuleIds": ["cyber-foundations"]
+  },
+  {
+    "term": "CISA KEV catalog",
+    "definition": "The Cybersecurity and Infrastructure Security Agency Known Exploited Vulnerabilities catalog of vulnerabilities with evidence of exploitation in the wild.",
+    "plainEnglish": "An official list showing which published vulnerabilities attackers are known to be using.",
+    "relatedModuleIds": ["vulnerability-management", "threat-intelligence"]
+  },
+  {
+    "term": "Cloud control plane",
+    "definition": "The interfaces and services used to create, configure, govern, and administer cloud resources.",
+    "plainEnglish": "The cloud's management layer where resources and policies are changed.",
+    "relatedModuleIds": ["cloud-security", "incident-response"]
+  },
+  {
+    "term": "Cloud service model",
+    "definition": "A division of cloud capabilities and responsibilities commonly described as Infrastructure, Platform, or Software as a Service.",
+    "plainEnglish": "A way to describe how much of the technology stack the provider operates.",
+    "relatedModuleIds": ["cloud-security"]
+  },
+  {
+    "term": "Compensating control",
+    "definition": "An alternative safeguard that provides comparable risk reduction when a preferred or required control is not feasible.",
+    "plainEnglish": "A substitute protection used because the first choice cannot currently work.",
+    "relatedModuleIds": ["cyber-foundations", "vulnerability-management"]
+  },
+  {
+    "term": "Confidentiality",
+    "definition": "The property that information is not disclosed or made available to unauthorized entities.",
+    "plainEnglish": "Keeping information from people and systems that should not receive it.",
+    "relatedModuleIds": ["cyber-foundations", "application-security", "cloud-security"]
+  },
+  {
+    "term": "Container",
+    "definition": "A packaged runtime unit that isolates an application and selected dependencies while commonly sharing a host operating-system kernel.",
+    "plainEnglish": "A portable application package that uses part of its host rather than carrying a whole guest computer.",
+    "relatedModuleIds": ["enterprise-it", "cloud-security"]
+  },
+  {
+    "term": "Containment",
+    "definition": "Incident-response actions intended to limit ongoing harm, spread, or exposure while preserving the ability to investigate and recover.",
+    "plainEnglish": "Putting boundaries around an incident so it causes less damage.",
+    "relatedModuleIds": ["incident-response", "endpoint-edr", "critical-infrastructure-readiness"]
+  },
+  {
+    "term": "Control",
+    "definition": "A policy, process, practice, or technical mechanism that modifies risk.",
+    "plainEnglish": "A safeguard chosen to reduce or manage risk.",
+    "relatedModuleIds": ["cyber-foundations", "security-engineering-operations"]
+  },
+  {
+    "term": "Corrective control",
+    "definition": "A control designed to limit damage, restore a desired state, or address a condition after an unwanted event.",
+    "plainEnglish": "A safeguard that helps fix or recover from a problem.",
+    "relatedModuleIds": ["cyber-foundations", "incident-response"]
+  },
+  {
+    "term": "CSPM",
+    "definition": "Cloud Security Posture Management is the continuous assessment of cloud configurations and resources against security policies and risk patterns.",
+    "plainEnglish": "Tools and processes that look for risky cloud settings and route them for review.",
+    "relatedModuleIds": ["cloud-security", "vulnerability-management"]
+  },
+  {
+    "term": "CSV",
+    "definition": "Comma-Separated Values is a tabular text format whose delimiter, quoting, headers, and encoding must be interpreted by a format-aware parser.",
+    "plainEnglish": "A text file representing rows and columns, with rules for values that contain commas or quotes.",
+    "relatedModuleIds": ["automation"]
+  },
+  {
+    "term": "CVSS",
+    "definition": "The Common Vulnerability Scoring System is a standardized method for describing technical severity characteristics of vulnerabilities.",
+    "plainEnglish": "A technical severity score that is useful input but not the whole business-risk decision.",
+    "relatedModuleIds": ["vulnerability-management"]
+  },
+  {
+    "term": "Data flow",
+    "definition": "The movement and transformation of data among actors, processes, stores, and external entities.",
+    "plainEnglish": "A map of where information comes from, goes, changes, and rests.",
+    "relatedModuleIds": ["enterprise-it", "application-security", "cloud-security"]
+  },
+  {
+    "term": "Defense in depth",
+    "definition": "A strategy that uses multiple diverse safeguards across prevention, detection, response, and recovery so no single control bears all risk.",
+    "plainEnglish": "Several different layers that still help when one protection fails.",
+    "relatedModuleIds": ["cyber-foundations", "network-security"]
+  },
+  {
+    "term": "Detection",
+    "definition": "The identification of observed conditions that may indicate a security-relevant event or behavior.",
+    "plainEnglish": "Recognizing evidence worth defensive attention.",
+    "relatedModuleIds": ["telemetry-siem", "detection-engineering"]
+  },
+  {
+    "term": "Detection engineering",
+    "definition": "The disciplined lifecycle of defining, implementing, testing, deploying, monitoring, tuning, and retiring defensive analytics.",
+    "plainEnglish": "Building and operating reliable security alarms as maintained products.",
+    "relatedModuleIds": ["detection-engineering"]
+  },
+  {
+    "term": "Diamond Model",
+    "definition": "An intrusion-analysis model that relates adversary, capability, infrastructure, and victim features within an event.",
+    "plainEnglish": "A way to connect who acted, what they used, where it came through, and who was targeted.",
+    "relatedModuleIds": ["threat-intelligence"]
+  },
+  {
+    "term": "Digital forensics",
+    "definition": "The use of repeatable methods to identify, preserve, collect, examine, analyze, and report digital evidence.",
+    "plainEnglish": "Carefully finding and explaining trustworthy evidence from digital systems.",
+    "relatedModuleIds": ["digital-forensics", "incident-response"]
+  },
+  {
+    "term": "Directory service",
+    "definition": "A service that stores and makes available identity, group, device, and related object information for lookup and policy use.",
+    "plainEnglish": "An organized identity catalog used by systems to find users, groups, and devices.",
+    "relatedModuleIds": ["enterprise-it", "cloud-security"]
+  },
+  {
+    "term": "DNS",
+    "definition": "The Domain Name System is a distributed naming system that resolves domain names and other service information into records.",
+    "plainEnglish": "The network directory that helps clients turn names into useful connection information.",
+    "relatedModuleIds": ["network-fundamentals", "network-security"]
+  },
+  {
+    "term": "Dynamic analysis",
+    "definition": "The observation of software behavior during controlled execution in an isolated, instrumented environment.",
+    "plainEnglish": "Watching what a program does while specialists run it in a contained lab.",
+    "relatedModuleIds": ["malware-analysis"]
+  },
+  {
+    "term": "EDR",
+    "definition": "Endpoint Detection and Response combines endpoint telemetry, analytics, investigation, search, and authorized response capabilities.",
+    "plainEnglish": "A defensive platform for seeing, investigating, and sometimes responding on managed devices.",
+    "relatedModuleIds": ["endpoint-edr", "incident-response"]
+  },
+  {
+    "term": "Egress",
+    "definition": "Network traffic leaving a defined system, interface, zone, or trust boundary.",
+    "plainEnglish": "Traffic going out of the boundary being discussed.",
+    "relatedModuleIds": ["network-security", "cloud-security"]
+  },
+  {
+    "term": "Encryption",
+    "definition": "A cryptographic transformation that protects data from disclosure to entities lacking the appropriate key.",
+    "plainEnglish": "Using managed keys to make data unreadable to unauthorized parties.",
+    "relatedModuleIds": ["network-fundamentals", "application-security", "cloud-security"]
+  },
+  {
+    "term": "Endpoint",
+    "definition": "A managed computing device or workload that acts as a source or destination of user, application, or network activity.",
+    "plainEnglish": "A device or system at the edge where work is performed.",
+    "relatedModuleIds": ["enterprise-it", "endpoint-edr"]
+  },
+  {
+    "term": "Eradication",
+    "definition": "Incident-response work that removes the condition, artifact, access, or weakness enabling malicious activity.",
+    "plainEnglish": "Removing what allowed the incident to continue or return.",
+    "relatedModuleIds": ["incident-response"]
+  },
+  {
+    "term": "Event",
+    "definition": "A recorded or observed occurrence in a system, service, network, process, or security source.",
+    "plainEnglish": "One observable thing that happened; it is not automatically an incident.",
+    "relatedModuleIds": ["telemetry-siem", "incident-response"]
+  },
+  {
+    "term": "Evidence integrity",
+    "definition": "The preservation and verification of evidence so unauthorized or unintended alteration can be detected and handling remains trustworthy.",
+    "plainEnglish": "Keeping evidence unchanged or being able to prove when its bytes changed.",
+    "relatedModuleIds": ["digital-forensics", "incident-response"]
+  },
+  {
+    "term": "Exception",
+    "definition": "A documented, authorized, time-bounded acceptance of deviation from an expected control with residual risk, safeguards, monitoring, and review.",
+    "plainEnglish": "Temporary permission to handle a requirement differently, with an owner and expiry.",
+    "relatedModuleIds": ["vulnerability-management", "security-engineering-operations"]
+  },
+  {
+    "term": "Exploit",
+    "definition": "A method or code that takes advantage of a vulnerability to cause unintended behavior.",
+    "plainEnglish": "A way of using a weakness to make a system do something it should not.",
+    "relatedModuleIds": ["vulnerability-management", "application-security"]
+  },
+  {
+    "term": "False negative",
+    "definition": "A case in which a detection or test fails to identify a condition that is actually present.",
+    "plainEnglish": "The alarm stays quiet even though the thing it should find happened.",
+    "relatedModuleIds": ["telemetry-siem", "detection-engineering"]
+  },
+  {
+    "term": "False positive",
+    "definition": "A case that satisfies detection or test logic but does not represent the intended condition or risk.",
+    "plainEnglish": "The alarm fires, but investigation shows it is not the behavior the alarm was meant to find.",
+    "relatedModuleIds": ["telemetry-siem", "detection-engineering"]
+  },
+  {
+    "term": "Firewall",
+    "definition": "A network security control that permits, denies, or otherwise handles traffic according to policy and observed attributes.",
+    "plainEnglish": "A policy checkpoint for network traffic.",
+    "relatedModuleIds": ["network-security", "cloud-security"]
+  },
+  {
+    "term": "Forensic image",
+    "definition": "A controlled copy of storage or memory acquired for forensic preservation and analysis.",
+    "plainEnglish": "An evidence copy made so analysis does not rely on changing the original.",
+    "relatedModuleIds": ["digital-forensics", "malware-analysis"]
+  },
+  {
+    "term": "Hash",
+    "definition": "A fixed-length digest computed from data by a cryptographic hash function and used for practical identity or integrity comparison.",
+    "plainEnglish": "A digital fingerprint for exact bytes, not proof that content is safe.",
+    "relatedModuleIds": ["digital-forensics", "malware-analysis"]
+  },
+  {
+    "term": "HTTP",
+    "definition": "Hypertext Transfer Protocol is an application-layer request-response protocol used to transfer web resources and related messages.",
+    "plainEnglish": "The structured conversation a web client and server use.",
+    "relatedModuleIds": ["network-fundamentals", "application-security"]
+  },
+  {
+    "term": "HTTPS",
+    "definition": "HTTP communicated over Transport Layer Security to provide transport confidentiality, integrity, and endpoint authentication according to configuration.",
+    "plainEnglish": "A web conversation protected in transit by TLS.",
+    "relatedModuleIds": ["network-fundamentals", "application-security"]
+  },
+  {
+    "term": "Hypothesis",
+    "definition": "A testable proposed explanation or prediction that identifies expected evidence and can be supported, rejected, or left inconclusive.",
+    "plainEnglish": "A focused idea that says what evidence should exist if it is right.",
+    "relatedModuleIds": ["threat-hunting", "detection-engineering"]
+  },
+  {
+    "term": "IAM",
+    "definition": "Identity and Access Management comprises identity lifecycle, authentication, authorization, access review, and related governance.",
+    "plainEnglish": "The people, rules, and technology that manage identities and what they may access.",
+    "relatedModuleIds": ["enterprise-it", "cloud-security"]
+  },
+  {
+    "term": "ICS",
+    "definition": "An Industrial Control System is an operational technology system used to monitor or control industrial processes.",
+    "plainEnglish": "Technology that observes or changes a physical industrial process.",
+    "relatedModuleIds": ["critical-infrastructure-readiness"]
+  },
+  {
+    "term": "Identity",
+    "definition": "A representation of a human, device, service, workload, or other entity used in authentication, authorization, and accountability.",
+    "plainEnglish": "The name and attributes by which a system recognizes an actor.",
+    "relatedModuleIds": ["enterprise-it", "application-security", "cloud-security"]
+  },
+  {
+    "term": "Incident",
+    "definition": "An occurrence that actually or imminently jeopardizes security objectives according to an organization's declared criteria.",
+    "plainEnglish": "A security event serious enough to require coordinated response under defined rules.",
+    "relatedModuleIds": ["incident-response", "critical-infrastructure-readiness"]
+  },
+  {
+    "term": "Incident response",
+    "definition": "Coordinated preparation, detection, analysis, containment, eradication, recovery, communication, and learning for security incidents.",
+    "plainEnglish": "The organized work of understanding an incident, limiting harm, restoring trust, and improving.",
+    "relatedModuleIds": ["incident-response", "cloud-security", "critical-infrastructure-readiness"]
+  },
+  {
+    "term": "Indicator of Attack",
+    "definition": "An observable behavioral pattern suggesting that attack activity is occurring or has occurred.",
+    "plainEnglish": "A clue based on what an attacker appears to be doing.",
+    "relatedModuleIds": ["threat-intelligence", "threat-hunting"]
+  },
+  {
+    "term": "Indicator of Compromise",
+    "definition": "An observable artifact or value associated with possible compromise and requiring contextual validation.",
+    "plainEnglish": "A file, address, domain, or other clue that may be linked to compromise.",
+    "relatedModuleIds": ["threat-intelligence", "incident-response"]
+  },
+  {
+    "term": "Ingress",
+    "definition": "Network traffic entering a defined system, interface, zone, or trust boundary.",
+    "plainEnglish": "Traffic coming into the boundary being discussed.",
+    "relatedModuleIds": ["network-security", "cloud-security"]
+  },
+  {
+    "term": "Integrity",
+    "definition": "The property of information or systems being accurate, complete, authentic as required, and protected from unauthorized modification.",
+    "plainEnglish": "Keeping data and system changes trustworthy.",
+    "relatedModuleIds": ["cyber-foundations", "digital-forensics", "critical-infrastructure-readiness"]
+  },
+  {
+    "term": "Intelligence lifecycle",
+    "definition": "A repeatable cycle of direction, collection, processing, analysis, dissemination, and feedback for decision-focused intelligence.",
+    "plainEnglish": "The loop that turns a question and authorized sources into useful analysis and improvement.",
+    "relatedModuleIds": ["threat-intelligence"]
+  },
+  {
+    "term": "IP address",
+    "definition": "An Internet Protocol address is a logical identifier assigned to a network interface for addressing and routing.",
+    "plainEnglish": "A routable network address that may change or be shared and does not by itself identify a person.",
+    "relatedModuleIds": ["network-fundamentals", "network-security"]
+  },
+  {
+    "term": "JSON",
+    "definition": "JavaScript Object Notation is a text format representing objects, arrays, strings, numbers, booleans, and null.",
+    "plainEnglish": "A common structured text format programs use to exchange data.",
+    "relatedModuleIds": ["automation", "telemetry-siem"]
+  },
+  {
+    "term": "KQL",
+    "definition": "Kusto Query Language is a query language used by Microsoft data services to filter, transform, correlate, and summarize structured data.",
+    "plainEnglish": "A language for asking questions of certain Microsoft-hosted data tables.",
+    "relatedModuleIds": ["telemetry-siem", "threat-hunting"]
+  },
+  {
+    "term": "Least privilege",
+    "definition": "The principle of granting an identity only the permissions, scope, and duration necessary for an approved purpose.",
+    "plainEnglish": "Give only the access needed for the task, and remove it when the task ends.",
+    "relatedModuleIds": ["cyber-foundations", "enterprise-it", "cloud-security"]
+  },
+  {
+    "term": "Log",
+    "definition": "A time-associated record of events or observations produced by a system, application, service, network device, or security control.",
+    "plainEnglish": "A source's recorded account of selected things it observed.",
+    "relatedModuleIds": ["telemetry-siem", "endpoint-edr", "automation"]
+  },
+  {
+    "term": "Malware",
+    "definition": "Software or code intentionally used to perform unauthorized, harmful, or deceptive actions.",
+    "plainEnglish": "Software used to cause harm or act without permission.",
+    "relatedModuleIds": ["malware-analysis", "incident-response"]
+  },
+  {
+    "term": "Memory forensics",
+    "definition": "The forensic examination of acquired volatile memory to identify processes, code, connections, data, and other runtime artifacts.",
+    "plainEnglish": "Studying a careful copy of what a computer held in working memory.",
+    "relatedModuleIds": ["digital-forensics", "malware-analysis"]
+  },
+  {
+    "term": "MITRE ATT&CK",
+    "definition": "A public knowledge base organizing observed adversary behaviors into tactics, techniques, and related information.",
+    "plainEnglish": "A shared vocabulary for discussing how adversaries behave.",
+    "relatedModuleIds": ["threat-intelligence", "threat-hunting", "detection-engineering"]
+  },
+  {
+    "term": "NAT",
+    "definition": "Network Address Translation rewrites network addresses or ports as traffic crosses a translation point.",
+    "plainEnglish": "A gateway changes visible addressing, often letting many private systems share one public address.",
+    "relatedModuleIds": ["network-fundamentals", "network-security"]
+  },
+  {
+    "term": "Network segmentation",
+    "definition": "The separation of networked systems into zones or boundaries with controlled communication based on function, sensitivity, and trust.",
+    "plainEnglish": "Dividing networks so systems can reach only the areas they need.",
+    "relatedModuleIds": ["network-security", "cloud-security", "critical-infrastructure-readiness"]
+  },
+  {
+    "term": "Normalization",
+    "definition": "The mapping of varied source data into a consistent representation while retaining sufficient source meaning and provenance.",
+    "plainEnglish": "Putting different log formats into shared columns so they can be compared.",
+    "relatedModuleIds": ["telemetry-siem", "threat-hunting"]
+  },
+  {
+    "term": "Order of volatility",
+    "definition": "A forensic prioritization concept that considers how quickly potential evidence may change or disappear.",
+    "plainEnglish": "Collect the most short-lived useful evidence before it vanishes, while balancing safety.",
+    "relatedModuleIds": ["digital-forensics"]
+  },
+  {
+    "term": "OSI model",
+    "definition": "The Open Systems Interconnection model is a seven-layer conceptual framework for describing network communication functions.",
+    "plainEnglish": "A troubleshooting map that separates network jobs into layers.",
+    "relatedModuleIds": ["network-fundamentals"]
+  },
+  {
+    "term": "OT",
+    "definition": "Operational Technology comprises hardware and software that monitors or controls physical devices, processes, and events.",
+    "plainEnglish": "Technology that observes or changes the physical world.",
+    "relatedModuleIds": ["critical-infrastructure-readiness"]
+  },
+  {
+    "term": "Packet",
+    "definition": "A formatted unit of data transmitted across a packet-switched network, containing protocol headers and payload.",
+    "plainEnglish": "A labeled piece of network data sent toward a destination.",
+    "relatedModuleIds": ["network-fundamentals", "network-security"]
+  },
+  {
+    "term": "Parsing",
+    "definition": "The process of interpreting input syntax and extracting structured values according to a defined format.",
+    "plainEnglish": "Turning raw text or bytes into fields a program can work with.",
+    "relatedModuleIds": ["telemetry-siem", "automation"]
+  },
+  {
+    "term": "Patch",
+    "definition": "A vendor or developer change intended to correct defects, including security vulnerabilities, in software or firmware.",
+    "plainEnglish": "An update that fixes a known problem, subject to testing and safe rollout.",
+    "relatedModuleIds": ["vulnerability-management", "security-engineering-operations"]
+  },
+  {
+    "term": "PE",
+    "definition": "Portable Executable is a Windows format for executable files, object code, and dynamic libraries with defined headers and sections.",
+    "plainEnglish": "The structured file layout commonly used by Windows programs and libraries.",
+    "relatedModuleIds": ["malware-analysis"]
+  },
+  {
+    "term": "Port",
+    "definition": "A transport-layer numeric identifier used to direct TCP or UDP traffic to an application endpoint.",
+    "plainEnglish": "A numbered application doorway on a networked system.",
+    "relatedModuleIds": ["network-fundamentals", "network-security"]
+  },
+  {
+    "term": "Preventive control",
+    "definition": "A control designed to reduce the likelihood that an unwanted event occurs or succeeds.",
+    "plainEnglish": "A safeguard intended to stop a problem before it happens.",
+    "relatedModuleIds": ["cyber-foundations", "application-security"]
+  },
+  {
+    "term": "Process",
+    "definition": "A running instance of a program with associated memory, identity, resources, and execution state.",
+    "plainEnglish": "A program while it is actually running.",
+    "relatedModuleIds": ["endpoint-edr", "digital-forensics"]
+  },
+  {
+    "term": "Process tree",
+    "definition": "A representation of process creation relationships linking parent and child processes over time.",
+    "plainEnglish": "A family-tree view showing which running program started another.",
+    "relatedModuleIds": ["endpoint-edr", "malware-analysis"]
+  },
+  {
+    "term": "Proxy",
+    "definition": "An intermediary that receives and sends network requests on behalf of clients or servers and may enforce application-aware policy.",
+    "plainEnglish": "A controlled middle service that communicates for another system.",
+    "relatedModuleIds": ["network-security", "cloud-security"]
+  },
+  {
+    "term": "RCA",
+    "definition": "Root Cause Analysis is a structured examination of direct and contributing technical, process, organizational, and human conditions behind an outcome.",
+    "plainEnglish": "Looking beyond the immediate failure to understand why the system allowed it.",
+    "relatedModuleIds": ["incident-response", "security-engineering-operations"]
+  },
+  {
+    "term": "Recovery",
+    "definition": "The restoration of services, data, operations, and confidence to an acceptable state after disruption or incident.",
+    "plainEnglish": "Returning to trusted operation and watching for problems to return.",
+    "relatedModuleIds": ["incident-response", "critical-infrastructure-readiness"]
+  },
+  {
+    "term": "Remediation",
+    "definition": "Action that removes, reduces, or otherwise treats a verified weakness or harmful condition.",
+    "plainEnglish": "Fixing or controlling the condition that creates risk.",
+    "relatedModuleIds": ["vulnerability-management", "application-security"]
+  },
+  {
+    "term": "Risk",
+    "definition": "The effect of uncertainty on objectives, commonly evaluated using plausible events, likelihood, consequences, and existing controls.",
+    "plainEnglish": "What might happen, how likely it is, and how much it would matter.",
+    "relatedModuleIds": ["cyber-foundations", "vulnerability-management", "security-engineering-operations"]
+  },
+  {
+    "term": "Rollback",
+    "definition": "A planned method to restore a previous known state when a change fails or creates unacceptable impact.",
+    "plainEnglish": "The safe way back if a change does not work.",
+    "relatedModuleIds": ["enterprise-it", "detection-engineering", "security-engineering-operations"]
+  },
+  {
+    "term": "Root cause",
+    "definition": "A fundamental or contributing condition whose correction can prevent recurrence or materially reduce future impact.",
+    "plainEnglish": "A deeper reason the incident was possible, often one of several rather than one simple cause.",
+    "relatedModuleIds": ["incident-response", "security-engineering-operations"]
+  },
+  {
+    "term": "Routing",
+    "definition": "The selection and use of network paths to forward packets between networks.",
+    "plainEnglish": "How network devices choose where to send packets next.",
+    "relatedModuleIds": ["network-fundamentals", "network-security"]
+  },
+  {
+    "term": "SDLC",
+    "definition": "The Software Development Lifecycle is the sequence of planning, requirements, design, implementation, testing, release, operation, and retirement activities for software.",
+    "plainEnglish": "The full journey of software from idea through safe shutdown.",
+    "relatedModuleIds": ["application-security"]
+  },
+  {
+    "term": "Security control",
+    "definition": "An administrative, technical, physical, or procedural safeguard selected to modify security risk.",
+    "plainEnglish": "A specific protection operated to reduce risk.",
+    "relatedModuleIds": ["cyber-foundations", "security-engineering-operations"]
+  },
+  {
+    "term": "Service account",
+    "definition": "A nonhuman identity used by an application, service, job, or workload to access resources.",
+    "plainEnglish": "An identity for software rather than a person, which still needs an owner and limited access.",
+    "relatedModuleIds": ["enterprise-it", "threat-hunting", "cloud-security"]
+  },
+  {
+    "term": "Session",
+    "definition": "A bounded period of interaction in which a system maintains security and application state for an authenticated or identified entity.",
+    "plainEnglish": "The temporary state that keeps a user or client signed in across requests.",
+    "relatedModuleIds": ["application-security", "cloud-security"]
+  },
+  {
+    "term": "Severity",
+    "definition": "A classification of the actual or potential consequence and urgency of a finding, vulnerability, or incident under defined criteria.",
+    "plainEnglish": "How serious and urgent the situation is based on impact and evidence.",
+    "relatedModuleIds": ["incident-response", "vulnerability-management"]
+  },
+  {
+    "term": "Shared responsibility",
+    "definition": "A cloud governance model dividing security and operational duties between a service provider and its customer according to service and configuration.",
+    "plainEnglish": "The provider secures some layers and the customer secures others; exact duties depend on what is used.",
+    "relatedModuleIds": ["cloud-security"]
+  },
+  {
+    "term": "SIEM",
+    "definition": "Security Information and Event Management is a capability that collects, processes, stores, searches, correlates, and presents security-relevant event data.",
+    "plainEnglish": "A central platform for security logs, searches, analytics, alerts, and investigations.",
+    "relatedModuleIds": ["telemetry-siem", "detection-engineering"]
+  },
+  {
+    "term": "Sigma",
+    "definition": "A generic, structured format for describing log detection logic and metadata for translation and sharing across supported backends.",
+    "plainEnglish": "A portable way to write a detection idea that still needs local validation.",
+    "relatedModuleIds": ["detection-engineering"]
+  },
+  {
+    "term": "SPL",
+    "definition": "Search Processing Language is Splunk's language for searching, transforming, correlating, and reporting indexed data.",
+    "plainEnglish": "A language used to ask questions of data in Splunk products.",
+    "relatedModuleIds": ["telemetry-siem"]
+  },
+  {
+    "term": "Stateful firewall",
+    "definition": "A firewall that tracks connection state and uses that context when evaluating packets, including expected return traffic.",
+    "plainEnglish": "A network checkpoint that remembers approved conversations.",
+    "relatedModuleIds": ["network-security"]
+  },
+  {
+    "term": "Static analysis",
+    "definition": "The examination of software or a file without executing it, using properties such as structure, metadata, hashes, and strings.",
+    "plainEnglish": "Inspecting a file without running it.",
+    "relatedModuleIds": ["malware-analysis", "application-security"]
+  },
+  {
+    "term": "Sysmon",
+    "definition": "Microsoft Sysinternals System Monitor is a configurable Windows service and driver that records selected system activity to an event log.",
+    "plainEnglish": "A Windows telemetry source that can record configured process, network, file, and other events.",
+    "relatedModuleIds": ["endpoint-edr", "telemetry-siem"]
+  },
+  {
+    "term": "TCP",
+    "definition": "Transmission Control Protocol is a stateful transport protocol providing an ordered, reliable byte stream with acknowledgment and retransmission.",
+    "plainEnglish": "A network transport that keeps track of order and resends missing data.",
+    "relatedModuleIds": ["network-fundamentals"]
+  },
+  {
+    "term": "Telemetry",
+    "definition": "Measurements and observations collected from systems and transmitted or retained for monitoring, analysis, and operation.",
+    "plainEnglish": "The evidence systems produce about their condition and activity.",
+    "relatedModuleIds": ["telemetry-siem", "endpoint-edr", "detection-engineering"]
+  },
+  {
+    "term": "Threat",
+    "definition": "A circumstance, event, or actor with the potential to cause harm to an asset or objective.",
+    "plainEnglish": "Something that could cause harm.",
+    "relatedModuleIds": ["cyber-foundations", "threat-intelligence"]
+  },
+  {
+    "term": "Threat hunting",
+    "definition": "A proactive, hypothesis-driven examination of available evidence for security-relevant behavior not already resolved by alerts.",
+    "plainEnglish": "A planned search that tests whether a concerning behavior is present.",
+    "relatedModuleIds": ["threat-hunting", "detection-engineering"]
+  },
+  {
+    "term": "Threat intelligence",
+    "definition": "Evaluated information about threats that is analyzed for relevance, confidence, timeliness, and support to a defined decision.",
+    "plainEnglish": "Threat information turned into decision-ready analysis.",
+    "relatedModuleIds": ["threat-intelligence", "threat-hunting"]
+  },
+  {
+    "term": "Threat modeling",
+    "definition": "A structured process for understanding a system, identifying plausible unwanted outcomes, and selecting and validating safeguards.",
+    "plainEnglish": "Thinking through what is being built, what can go wrong, and what should reduce the risk.",
+    "relatedModuleIds": ["application-security", "security-engineering-operations"]
+  },
+  {
+    "term": "TLS",
+    "definition": "Transport Layer Security is a protocol that protects network communication through negotiated cryptography and endpoint authentication.",
+    "plainEnglish": "The protocol commonly used to encrypt and authenticate a connection in transit.",
+    "relatedModuleIds": ["network-fundamentals", "network-security", "cloud-security"]
+  },
+  {
+    "term": "TTP",
+    "definition": "Tactics, Techniques, and Procedures describe an actor's goals, methods, and implementation patterns at different levels of detail.",
+    "plainEnglish": "What an actor is trying to achieve, how they approach it, and how they carry it out.",
+    "relatedModuleIds": ["threat-intelligence", "threat-hunting", "detection-engineering"]
+  },
+  {
+    "term": "UDP",
+    "definition": "User Datagram Protocol is a connectionless transport protocol that sends independent datagrams without built-in delivery or ordering guarantees.",
+    "plainEnglish": "A lightweight network transport that sends messages without confirming each one arrived.",
+    "relatedModuleIds": ["network-fundamentals"]
+  },
+  {
+    "term": "Virtual machine",
+    "definition": "A software-defined computer that runs a guest operating system using virtualized hardware provided by a hypervisor.",
+    "plainEnglish": "A computer represented in software and sharing physical hardware through a virtualization layer.",
+    "relatedModuleIds": ["enterprise-it", "malware-analysis"]
+  },
+  {
+    "term": "VPN",
+    "definition": "A Virtual Private Network creates an encrypted logical connection over another network between authorized endpoints or networks.",
+    "plainEnglish": "A protected tunnel whose endpoints and access still need security controls.",
+    "relatedModuleIds": ["network-security"]
+  },
+  {
+    "term": "Vulnerability",
+    "definition": "A weakness in design, implementation, configuration, process, or control that could be exploited or triggered to cause harm.",
+    "plainEnglish": "A weakness that could help something go wrong.",
+    "relatedModuleIds": ["cyber-foundations", "vulnerability-management", "application-security"]
+  },
+  {
+    "term": "YARA",
+    "definition": "A pattern-matching language and tool used to identify files or data based on defined strings, byte patterns, metadata, and conditions.",
+    "plainEnglish": "A way to describe combinations of file clues for defensive matching.",
+    "relatedModuleIds": ["malware-analysis"]
+  },
+  {
+    "term": "Zero trust",
+    "definition": "A security approach that makes access decisions from explicitly evaluated identity, device, resource, context, and policy rather than implicit network location trust.",
+    "plainEnglish": "Continuously make scoped access decisions instead of trusting something just because it is inside a network.",
+    "relatedModuleIds": ["network-security", "cloud-security", "security-engineering-operations"]
+  }
+]
